@@ -65,35 +65,29 @@ public class Main {
 		Iterator<Object> itr = l1.iterator();
 		while (itr.hasNext()) {
 			int value = (int) itr.next();
-			if (!exists(value, l2))
+			if (!l1.exists(value, l2))
 				result.insertFront(value);
 		}
 		return result;
-	}
-
-	private static boolean exists(int aux, MySimpleLinkedList list) {
-		Iterator<Object> itr = list.iterator();
-		while (itr.hasNext()) {
-			if ((int) itr.next() == aux)
-				return true;
-		}
-		return false;
 	}
 
 	public static void main(String[] args) {
 		MySimpleLinkedList list1 = new MySimpleLinkedList();
 		MySimpleLinkedList list2 = new MySimpleLinkedList();
 		MySimpleLinkedList list3 = new MySimpleLinkedList();
+		
 		list1.insertFront(9);
 		list1.insertFront(6);
 		list1.insertFront(5);
-		list1.insertFront(2);
+		list1.insertFront(4);
 		list1.insertFront(1);
+		
 		list2.insertFront(9);
 		list2.insertFront(7);
 		list2.insertFront(6);
 		list2.insertFront(3);
 		list2.insertFront(2);
+		
 		list1.print(list1.size());
 		System.out.println();
 		Iterator<Object> itr = list2.iterator();
