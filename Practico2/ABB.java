@@ -27,9 +27,9 @@ public class ABB {
 	}
 	
 	private boolean hasElement(TNode root, Object o) {
-		// Si es null o llega a la hoja retorna false
+		// Si es null o llega a la hoja entonces no lo encontro y retorna false
 		// si coincide retorno true
-		// si es menor busca en el subarbol izquierdo y si es mayor en el derecho.
+		// si es menor busca en el subarbol izquierdo y si es mayor en el derecho
 		
 		if (root == null) 
 			return false;
@@ -84,7 +84,9 @@ public class ABB {
 		}
 		int left = getHeight(root.getLeft());
 		int rigth = getHeight(root.getRigth());
-		return Math.max(left, rigth)+1;
+		if (left>rigth)
+			return left+1;
+		else return rigth+1;
 		//mas uno por la raiz
 	}
 	
@@ -95,6 +97,7 @@ public class ABB {
 	private Object getMaxElem(TNode root) {
 			if (root.getRigth() != null) 
 				return getMaxElem(root.getRigth());	
+	
 			else return root.getInfo();
 	}
 	
@@ -109,6 +112,14 @@ public class ABB {
 	}
 	
 	public boolean delete(Object o) {
+		//	3 casos:
+		//	1) El nodo es una hoja
+	 	//	Borrar sin más trámite.
+		//	2) El nodo tiene un hijo solamente
+		// 	Acomodar el puntero para ignorar el nodo borrado y alcanzar el hijo.
+		//	3) El nodo tiene sus 2 hijos
+		//	Reemplazar con el NMI del subárbol derecho
+		// 	Borrar el NMI del subárbol izquierdo
 		return false;
 	}
 	
