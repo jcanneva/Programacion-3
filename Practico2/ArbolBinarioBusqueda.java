@@ -10,9 +10,15 @@ public class ArbolBinarioBusqueda {
 		this.root = n;
 	}
 
+	public boolean isEmpty() {
+		return this.root == null;
+	}
+	
 	public Object getRoot() {
-		// pasar el Object o el nodo?
-		return this.root.getInfo();
+		if (isEmpty())
+			return null;
+		else
+			return this.root.getInfo();
 	}
 
 	public boolean hasElement(Object o) {
@@ -34,10 +40,6 @@ public class ArbolBinarioBusqueda {
 			else
 				return hasElement(root.getRigth(), o);
 		}
-	}
-
-	public boolean isEmpty() {
-		return this.root == null;
 	}
 
 	public void insert(Object o) {
