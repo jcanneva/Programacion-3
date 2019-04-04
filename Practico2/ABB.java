@@ -7,8 +7,7 @@ public class ABB {
 	private TNode root;
 	
 	public ABB(TNode n) {
-		this.root = n;
-		
+		this.root = n;	
 	}
 
 	public boolean isEmpty() {
@@ -27,10 +26,10 @@ public class ABB {
 	}
 	
 	private boolean hasElement(TNode root, Object o) {
-		// Si es null o llega a la hoja entonces no lo encontro y retorna false
+		// Si es null llego a la hoja, no lo encontro y retorna false
 		// si coincide retorno true
 		// si es menor busca en el subarbol izquierdo y si es mayor en el derecho
-		
+	
 		if (root == null) 
 			return false;
 		else {	
@@ -95,10 +94,12 @@ public class ABB {
 	}
 	
 	private Object getMaxElem(TNode root) {
+		if (!isEmpty()) {
 			if (root.getRigth() != null) 
 				return getMaxElem(root.getRigth());	
-	
 			else return root.getInfo();
+		}
+		else return null;
 	}
 	
 	public Object getMinElem() {
@@ -106,9 +107,12 @@ public class ABB {
 	}
 	
 	private Object getMinElem(TNode root) {
-		if (root.getLeft() != null) 
-			return getMinElem(root.getLeft());	
-		else return root.getInfo();
+		if (!isEmpty()) {
+			if (root.getLeft() != null) 
+				return getMinElem(root.getLeft());	
+			else return root.getInfo();
+		}
+		else return null;
 	}
 	
 	public boolean delete(Object o) {
