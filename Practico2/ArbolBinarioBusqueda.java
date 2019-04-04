@@ -5,11 +5,10 @@ import Practico1.MySimpleLinkedList;
 public class ArbolBinarioBusqueda {
 
 	private TNode root;
-	private int high;
 	
 	public ArbolBinarioBusqueda(TNode n) {
 		this.root = n;
-		this.high=0;
+		
 	}
 
 	public boolean isEmpty() {
@@ -30,7 +29,7 @@ public class ArbolBinarioBusqueda {
 	private boolean hasElement(TNode root, Object o) {
 		// Si es null o llega a la hoja retorna false
 		// si coincide retorno true
-		// si es menor busca en el subárbol izquierdo y si es mayor en el derecho.
+		// si es menor busca en el subarbol izquierdo y si es mayor en el derecho.
 		
 		if (root == null) 
 			return false;
@@ -83,10 +82,20 @@ public class ArbolBinarioBusqueda {
 		return 0;
 	}
 
+	public Object getMaxElem() {
+		return getMaxElem(this.root);
+	}
+	
+	private Object getMaxElem(TNode root) {
+			if (root.getRigth() != null) 
+				return getMaxElem(root.getRigth());	
+			else return root.getInfo();
+	}
+	
 	public boolean delete(Object o) {
 		return false;
 	}
-
+	
 	public void printPreOrder() {
 		printPreOrder(this.root);
 	}
@@ -121,14 +130,6 @@ public class ArbolBinarioBusqueda {
 		printInOrder(root.getLeft());
 		System.out.println((int) root.getInfo());
 		printInOrder(root.getRigth());
-	}
-
-	public Object getMaxElem(TNode root) {
-		if (root.getRigth() == null) {
-			getMaxElem(root.getRigth());
-			return root.getInfo();
-		}
-		return null;
 	}
 
 	public MySimpleLinkedList getLongestBranch() {
