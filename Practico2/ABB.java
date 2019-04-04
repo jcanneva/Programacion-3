@@ -74,14 +74,20 @@ public class ABB {
 		}
 	}
 
-	public int getHigh() {
-		return getHigh(this.root);
+	public int getHeight() {
+		return getHeight(this.root);
 	}
 	
-	private int getHigh(TNode root) {
-		return 0;
+	private int getHeight(TNode root) {
+		if (root==null) {
+			return 0;
+		}
+		int left = getHeight(root.getLeft());
+		int rigth = getHeight(root.getRigth());
+		return Math.max(left, rigth)+1;
+		//mas uno por la raiz
 	}
-
+	
 	public Object getMaxElem() {
 		return getMaxElem(this.root);
 	}
@@ -90,6 +96,16 @@ public class ABB {
 			if (root.getRigth() != null) 
 				return getMaxElem(root.getRigth());	
 			else return root.getInfo();
+	}
+	
+	public Object getMinElem() {
+		return getMinElem(this.root);
+	}
+	
+	private Object getMinElem(TNode root) {
+		if (root.getLeft() != null) 
+			return getMinElem(root.getLeft());	
+		else return root.getInfo();
 	}
 	
 	public boolean delete(Object o) {
