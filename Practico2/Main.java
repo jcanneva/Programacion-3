@@ -3,26 +3,35 @@ package Practico2;
 public class Main {
 
 	public static void main(String[] args) {
-		Integer siete = 7;
-		TNode root= new TNode(siete);
+		Integer seis = 6;
+		TNode root= new TNode(seis);
 		root.setLeft(null);
 		root.setRigth(null);
 		ArbolBinarioBusqueda abb= new ArbolBinarioBusqueda(root);
+		Integer tres=3;
 		Integer cuatro = 4;
-		Integer nueve = 9;
-		Integer dos = 2;
-		Integer once=11;
 		Integer cinco=5;
+		Integer siete = 7;
+		Integer nueve = 9;
+		Integer ocho = 8;
+		abb.insert(cuatro);
+		abb.insert(ocho);
 		abb.insert(siete);
 		abb.insert(nueve);
-		abb.insert(dos);
-		abb.insert(once);
-		abb.insert(cuatro);
+		abb.insert(tres);
 		abb.insert(cinco);
+		System.out.println("order");
 		abb.printInOrder();
 		System.out.println();
-		Integer tres=3;
+		System.out.println("pre order");
+		abb.printPreOrder();
+		System.out.println();
+		System.out.println("pos order");
+		abb.printPosOrder();
+		System.out.println();
+		Integer once=11;
 		System.out.println("tres " + abb.hasElement(tres));
+		System.out.println("once " + abb.hasElement(once));
 		
 		
 		

@@ -5,9 +5,11 @@ import Practico1.MySimpleLinkedList;
 public class ArbolBinarioBusqueda {
 
 	private TNode root;
-
+	private int high;
+	
 	public ArbolBinarioBusqueda(TNode n) {
 		this.root = n;
+		this.high=0;
 	}
 
 	public boolean isEmpty() {
@@ -26,7 +28,7 @@ public class ArbolBinarioBusqueda {
 	}
 	
 	private boolean hasElement(TNode root, Object o) {
-		// Si es null retorna false
+		// Si es null o llega a la hoja retorna false
 		// si coincide retorno true
 		// si es menor busca en el subárbol izquierdo y si es mayor en el derecho.
 		
@@ -52,7 +54,7 @@ public class ArbolBinarioBusqueda {
 	private void insert(TNode root, Object o) {
 		if ((int)this.root.getInfo()!=(int)o) {	
 			if ((int)root.getInfo()>(int)o) {
-			//va a la izq
+			//va a la izquierda
 				if (root.getLeft()==null)
 				//si es null lo agrega
 					root.setLeft(new TNode(o));
@@ -61,16 +63,23 @@ public class ArbolBinarioBusqueda {
 					insert(root.getLeft(),o);
 			}
 			else {
-			//va a la der
+			//derecha same izquierda
 				if (root.getRigth()==null)
 					root.setRigth(new TNode(o));
 				else	
 					insert(root.getRigth(),o);	
 			}
 		}
+		else {
+			//si el valor es igual se puede hacer una lista con los valores repetidos
+		}
 	}
 
 	public int getHigh() {
+		return getHigh(this.root);
+	}
+	
+	private int getHigh(TNode root) {
 		return 0;
 	}
 
@@ -97,8 +106,8 @@ public class ArbolBinarioBusqueda {
 	private void printPosOrder(TNode root) {
 		if (root == null)
 			return;
-		printPosOrder(root.getRigth());
 		printPosOrder(root.getLeft());
+		printPosOrder(root.getRigth());
 		System.out.println((int) root.getInfo());
 	}
 
