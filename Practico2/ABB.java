@@ -2,11 +2,11 @@ package Practico2;
 
 import Practico1.MySimpleLinkedList;
 
-public class ArbolBinarioBusqueda {
+public class ABB {
 
 	private TNode root;
 	
-	public ArbolBinarioBusqueda(TNode n) {
+	public ABB(TNode n) {
 		this.root = n;
 		
 	}

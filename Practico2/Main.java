@@ -7,7 +7,7 @@ public class Main {
 		TNode root= new TNode(seis);
 		root.setLeft(null);
 		root.setRigth(null);
-		ArbolBinarioBusqueda abb= new ArbolBinarioBusqueda(root);
+		ABB abb= new ABB(root);
 		Integer tres=3;
 		Integer cuatro = 4;
 		Integer cinco=5;
