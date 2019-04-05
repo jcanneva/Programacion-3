@@ -57,7 +57,7 @@ public class ABB {
 		if ((int)this.root.getInfo()!=(int)o) {	
 			if ((int)root.getInfo()>(int)o) {
 			//va a la izquierda
-				if (root.getLeft()==null)
+				if (isNull(root.getLeft()))
 				//si es null lo agrega
 					root.setLeft(new TNode(o));
 				else
@@ -66,7 +66,7 @@ public class ABB {
 			}
 			else {
 			//derecha same izquierda
-				if (root.getRigth()==null)
+				if (isNull(root.getRigth()))
 					root.setRigth(new TNode(o));
 				else	
 					insert(root.getRigth(),o);	
