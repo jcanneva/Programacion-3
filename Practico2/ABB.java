@@ -19,11 +19,15 @@ public class ABB {
 	}
 	
 	private boolean match(TNode root, Object o) {
-		return (getValue(root) == (int) o);
+		return (getValue(root) ==  castInt(o));
 	}
 	
 	private int getValue(TNode root) {
 		return (int)root.getInfo();
+	}
+	
+	private int castInt(Object o) {
+		return (int)o;
 	}
 	
 	public Object getRoot() {
@@ -47,7 +51,7 @@ public class ABB {
 		else {	
 			if (match(root,o))
 				return true;
-			else if (getValue(root) > (int) o)
+			else if (getValue(root) > castInt(o))
 				return hasElement(root.getLeft(), o);
 			else
 				return hasElement(root.getRigth(), o);
@@ -63,7 +67,7 @@ public class ABB {
 
 	private void insert(TNode root, Object o) {
 		if (!match(root,o)) {	
-			if (getValue(root)>(int)o) {
+			if (getValue(root)>castInt(o)) {
 			//va a la izquierda
 				if (isNull(root.getLeft()))
 				//si es null lo agrega

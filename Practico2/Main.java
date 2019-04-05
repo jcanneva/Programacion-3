@@ -32,8 +32,8 @@ public class Main {
 		Integer once=11;
 		System.out.println("tres " + abb.hasElement(tres));
 		System.out.println("once " + abb.hasElement(once));
-		System.out.println("Min "+(int)abb.getMinElem());
-		System.out.println("Max "+(int)abb.getMaxElem());
+		System.out.println("Min "+abb.getMinElem());
+		System.out.println("Max "+abb.getMaxElem());
 		System.out.println("Altura "+abb.getHeight());
 	}
 }
