@@ -14,12 +14,14 @@ public class Main {
 		Integer siete = 7;
 		Integer nueve = 9;
 		Integer ocho = 8;
+		Integer once=11;
 		abb.insert(cuatro);
 		abb.insert(ocho);
 		abb.insert(siete);
 		abb.insert(nueve);
 		abb.insert(tres);
 		abb.insert(cinco);
+		abb.insert(once);
 		System.out.println("order");
 		abb.printInOrder();
 		System.out.println();
@@ -29,7 +31,6 @@ public class Main {
 		System.out.println("pos order");
 		abb.printPosOrder();
 		System.out.println();
-		Integer once=11;
 		System.out.println("tres " + abb.hasElement(tres));
 		System.out.println("once " + abb.hasElement(once));
 		System.out.println("Min "+abb.getMinElem());
