@@ -8,6 +8,7 @@ public class Main {
 		root.setLeft(null);
 		root.setRigth(null);
 		ABB abb= new ABB(root);
+		Integer dos=2;
 		Integer tres=3;
 		Integer cuatro = 4;
 		Integer cinco=5;
@@ -21,7 +22,8 @@ public class Main {
 		abb.insert(nueve);
 		abb.insert(tres);
 		abb.insert(cinco);
-		abb.insert(once);
+//		abb.insert(once);
+		abb.insert(dos);
 		System.out.println("order");
 		abb.printInOrder();
 		System.out.println();
@@ -37,7 +39,7 @@ public class Main {
 		System.out.println("Max "+abb.getMaxElem());
 		System.out.println("Altura "+abb.getHeight());
 		System.out.println();
-		System.out.println("elimina"+ abb.delete(nueve));
+		System.out.println("elimina"+ abb.delete(once));
 		System.out.println();
 		abb.printInOrder();
 	}

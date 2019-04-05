@@ -131,29 +131,30 @@ public class ABB {
 	}
 	
 	public boolean delete(Object o) {
-		return delete(o,this.root,null);
+		if (hasElement(o))
+			 return delete(o,this.root,null);
+		else 
+			return false;
+			
 	}
 	
-	private boolean delete(Object o, TNode root, TNode father) {
-			if (match(root,o)) {
-				if (isHoja(root)) {
-					if (match(father.getLeft(),root.getInfo()))
-						father.setLeft(null);
-					else if (match(father.getRigth(),root.getInfo()))
-							father.setRigth(null);
+	private boolean delete(Object o, TNode root, TNode father) {	
+		if (match(root,o)) {
+			if (isHoja(root)) {
+				if (match(father.getLeft(),root.getInfo()))
+					father.setLeft(null);
+				else if (match(father.getRigth(),root.getInfo()))
+						father.setRigth(null);
 					else
 						//caso raiz
 						root=null;
-					
-				}
-				else  if (isFull(root)){ 
-					//dos hijos
-					//Reemplazar con el NMI del subárbol derecho
+			}
+			else  if (isFull(root)){ 
+					//dos hijos: reemplazar con el NMI del subárbol derecho
 					
 				}
 				else {
-					//un hijo
-					//Acomodar el puntero para ignorar el nodo borrado y alcanzar el hijo.
+					//un hijo : acomodar el puntero para ignorar el nodo borrado y alcanzar el hijo.
 					if (match(father.getLeft(),root.getInfo())){
 						if (!isNull(root.getLeft()))
 							father.setLeft(root.getLeft());
@@ -165,14 +166,13 @@ public class ABB {
 							father.setRigth(root.getLeft());
 						else
 							father.setRigth(root.getRigth());
-						}	
+						}
 				}
-				return true;
-			}
-			else if (getValueInt(root)>castInt(o)) 
-					return delete(o,root.getLeft(),root);
-			else 
-				return delete(o,root.getRigth(),root);	
+		return true;
+		}
+		else if (getValueInt(root)>castInt(o)) 
+				return delete(o,root.getLeft(),root);
+		else return delete(o,root.getRigth(),root);
 	}	
 	
 	private boolean isFull(TNode root) {
