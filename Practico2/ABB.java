@@ -10,8 +10,12 @@ public class ABB {
 		this.root = n;	
 	}
 
+	public boolean isNull(TNode root) {
+		return root==null;
+	}
+	
 	public boolean isEmpty() {
-		return this.root == null;
+		return isNull(this.root);
 	}
 	
 	public Object getRoot() {
@@ -30,7 +34,7 @@ public class ABB {
 		// si coincide retorno true
 		// si es menor busca en el subarbol izquierdo y si es mayor en el derecho
 	
-		if (root == null) 
+		if (isNull(root)) 
 			return false;
 		else {	
 			if ((int) root.getInfo() == (int) o)
@@ -78,7 +82,7 @@ public class ABB {
 	}
 	
 	private int getHeight(TNode root) {
-		if (root==null) {
+		if (isNull(root)) {
 			return 0;
 		}
 		int left = getHeight(root.getLeft());
@@ -93,8 +97,8 @@ public class ABB {
 	}
 	
 	private Object getMaxElem(TNode root) {
-		if (!isEmpty()) {
-			if (root.getRigth() != null) 
+		if (!isNull(root)) {
+			if (!isNull(root.getRigth())) 
 				return getMaxElem(root.getRigth());	
 			else return root.getInfo();
 		}
@@ -106,8 +110,8 @@ public class ABB {
 	}
 	
 	private Object getMinElem(TNode root) {
-		if (!isEmpty()) {
-			if (root.getLeft() != null) 
+		if (!isNull(root)) {
+			if (!isNull(root.getLeft())) 
 				return getMinElem(root.getLeft());	
 			else return root.getInfo();
 		}
