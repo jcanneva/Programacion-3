@@ -35,5 +35,9 @@ public class Main {
 		System.out.println("Min "+abb.getMinElem());
 		System.out.println("Max "+abb.getMaxElem());
 		System.out.println("Altura "+abb.getHeight());
+		System.out.println();
+		System.out.println("elimina"+ abb.delete(nueve));
+		System.out.println();
+		abb.printInOrder();
 	}
 }

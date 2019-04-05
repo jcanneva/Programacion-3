@@ -131,6 +131,36 @@ public class ABB {
 	}
 	
 	public boolean delete(Object o) {
+		return delete(o,this.root);
+	}
+	
+	private boolean delete(Object o, TNode root) {
+		
+		if (hasElement(root,o)) {
+			if (match(root,o)) {
+				if (isHoja(root)) {
+					root=null;
+				}
+				else  { 
+					//es un nodo interno
+					
+				}
+				return true;
+			}
+			else if (getValue(root)>castInt(o)) 
+					return delete(o,root.getLeft());
+			else 
+				return delete(o,root.getRigth());	
+		}	
+			else return false;
+		
+		
+		//Suprimir (x, A)
+		//1. Buscar la clave X
+		//2. Si X es una hoja, suprimir X
+		//3. Si no // o sea está borrando un nodo interno!!
+		//a) Reemplace con el NMI del subárbol derecho
+		//b) Suprimir (NMI, subárbol derecho)
 		//	3 casos:
 		//	1) El nodo es una hoja
 	 	//	Borrar sin más trámite.
@@ -138,10 +168,14 @@ public class ABB {
 		// 	Acomodar el puntero para ignorar el nodo borrado y alcanzar el hijo.
 		//	3) El nodo tiene sus 2 hijos
 		//	Reemplazar con el NMI del subárbol derecho
-		// 	Borrar el NMI del subárbol izquierdo
-		return false;
+		// 	Borrar el NMI del subárbol derecho
+		
 	}
 	
+	private boolean isHoja(TNode root) {
+		return isNull(root.getLeft())&&isNull(root.getRigth());
+	}
+
 	public void printPreOrder() {
 		printPreOrder(this.root);
 	}
