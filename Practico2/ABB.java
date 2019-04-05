@@ -86,7 +86,6 @@ public class ABB {
 		if (left>rigth)
 			return left+1;
 		else return rigth+1;
-		//mas uno por la raiz
 	}
 	
 	public Object getMaxElem() {
