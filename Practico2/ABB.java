@@ -9,20 +9,28 @@ public class ABB {
 	public ABB(TNode n) {
 		this.root = n;	
 	}
-
-	public boolean isNull(TNode root) {
-		return root==null;
-	}
 	
 	public boolean isEmpty() {
 		return isNull(this.root);
+	}
+	
+	private boolean isNull(TNode root) {
+		return root==null;
+	}
+	
+	private boolean match(TNode root, Object o) {
+		return (getValue(root) == (int) o);
+	}
+	
+	private int getValue(TNode root) {
+		return (int)root.getInfo();
 	}
 	
 	public Object getRoot() {
 		if (isEmpty())
 			return null;
 		else
-			return this.root.getInfo();
+			return getValue(this.root);
 	}
 
 	public boolean hasElement(Object o) {
@@ -37,9 +45,9 @@ public class ABB {
 		if (isNull(root)) 
 			return false;
 		else {	
-			if ((int) root.getInfo() == (int) o)
+			if (match(root,o))
 				return true;
-			else if ((int) root.getInfo() > (int) o)
+			else if (getValue(root) > (int) o)
 				return hasElement(root.getLeft(), o);
 			else
 				return hasElement(root.getRigth(), o);
@@ -54,8 +62,8 @@ public class ABB {
 	}
 
 	private void insert(TNode root, Object o) {
-		if ((int)this.root.getInfo()!=(int)o) {	
-			if ((int)root.getInfo()>(int)o) {
+		if (!match(root,o)) {	
+			if (getValue(root)>(int)o) {
 			//va a la izquierda
 				if (isNull(root.getLeft()))
 				//si es null lo agrega
@@ -100,7 +108,7 @@ public class ABB {
 		if (!isNull(root)) {
 			if (!isNull(root.getRigth())) 
 				return getMaxElem(root.getRigth());	
-			else return root.getInfo();
+			else return getValue(root);
 		}
 		else return null;
 	}
@@ -113,7 +121,7 @@ public class ABB {
 		if (!isNull(root)) {
 			if (!isNull(root.getLeft())) 
 				return getMinElem(root.getLeft());	
-			else return root.getInfo();
+			else return getValue(root);
 		}
 		else return null;
 	}
@@ -135,9 +143,9 @@ public class ABB {
 	}
 
 	private void printPreOrder(TNode root) {
-		if (root == null)
+		if (isNull(root))
 			return;
-		System.out.println((int) root.getInfo());
+		System.out.println(getValue(root));
 		printPreOrder(root.getLeft());
 		printPreOrder(root.getRigth());
 	}
@@ -147,11 +155,11 @@ public class ABB {
 	}
 
 	private void printPosOrder(TNode root) {
-		if (root == null)
+		if (isNull(root))
 			return;
 		printPosOrder(root.getLeft());
 		printPosOrder(root.getRigth());
-		System.out.println((int) root.getInfo());
+		System.out.println(getValue(root));
 	}
 
 	public void printInOrder() {
@@ -159,10 +167,10 @@ public class ABB {
 	}
 
 	private void printInOrder(TNode root) {
-		if (root == null)
+		if (isNull(root))
 			return;
 		printInOrder(root.getLeft());
-		System.out.println((int) root.getInfo());
+		System.out.println(getValue(root));
 		printInOrder(root.getRigth());
 	}
 
