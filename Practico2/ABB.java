@@ -135,26 +135,23 @@ public class ABB {
 			 return delete(o,this.root,null);
 		else 
 			return false;
-			
 	}
 	
 	private boolean delete(Object o, TNode root, TNode father) {	
 		if (match(root,o)) {
-			if (isHoja(root)) {
-				if (match(father.getLeft(),root.getInfo()))
-					father.setLeft(null);
-				else if (match(father.getRigth(),root.getInfo()))
-						father.setRigth(null);
-					else
-						//caso raiz
-						root=null;
+			if (isHoja(root)) { 
+				if (isNull(father)) //caso raiz
+					root=null;
+				else if (!isNull(father.getLeft())&&match(father.getLeft(),root.getInfo()))
+						father.setLeft(null);
+					else father.setRigth(null);
 			}
 			else  if (isFull(root)){ 
 					//dos hijos: reemplazar con el NMI del subárbol derecho
 					
 				}
 				else {
-					//un hijo : acomodar el puntero para ignorar el nodo borrado y alcanzar el hijo.
+					//un hijo : acomodar el puntero para ignorar el nodo borrado y alcanzar el hijo
 					if (match(father.getLeft(),root.getInfo())){
 						if (!isNull(root.getLeft()))
 							father.setLeft(root.getLeft());
