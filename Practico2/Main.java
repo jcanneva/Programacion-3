@@ -43,8 +43,8 @@ public class Main {
 		System.out.println("Max "+abb.getMaxElem());
 		System.out.println("Altura "+abb.getHeight());
 		System.out.println();
-		System.out.println("elimina "+ abb.delete(dos));
+		System.out.println("elimina "+ abb.delete(seis));
 		System.out.println();
-		abb.printInOrder();
+		abb.printPreOrder();
 	}
 }

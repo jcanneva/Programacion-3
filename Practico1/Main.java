@@ -65,7 +65,7 @@ public class Main {
 		Iterator<Object> itr = l1.iterator();
 		while (itr.hasNext()) {
 			int value = (int) itr.next();
-			if (!l1.exists(value, l2))
+			if (!l1.exist(value, l2))
 				result.insertFront(value);
 		}
 		return result;

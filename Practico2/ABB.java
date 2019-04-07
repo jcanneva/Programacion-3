@@ -19,7 +19,7 @@ public class ABB {
 	}
 	
 	private boolean match(TNode root, Object o) {
-		return (getValueInt(root) ==  castInt(o));
+		return (root.getInfo().equals(o));
 	}
 	
 	private int getValueInt(TNode root) {
@@ -28,6 +28,10 @@ public class ABB {
 	
 	private int castInt(Object o) {
 		return (int)o;
+	}
+	
+	public void setRoot(TNode root) {
+		this.root=root;
 	}
 	
 	public Object getRoot() {
@@ -137,40 +141,87 @@ public class ABB {
 			return false;
 	}
 	
-	private boolean delete(Object o, TNode root, TNode father) {	
+	private boolean delete(Object o, TNode root, TNode parent) {	
 		if (match(root,o)) {
-			if (isHoja(root)) { 
-				if (isNull(father)) //caso raiz
-					root=null;
-				else if (!isNull(father.getLeft())&&match(father.getLeft(),root.getInfo()))
-						father.setLeft(null);
-					else father.setRigth(null);
+			if (isHoja(root)) { //sin hijos
+				if (isNull(parent)) //caso raiz
+					setRoot(null);
+				else if (isLeft(root,parent))
+						parent.setLeft(null);
+					else parent.setRigth(null);
 			}
-			else  if (isFull(root)){ 
-					//dos hijos: reemplazar con el NMI del subárbol derecho
-					
-				}
-				else {
-					//un hijo : acomodar el puntero para ignorar el nodo borrado y alcanzar el hijo
-					if (match(father.getLeft(),root.getInfo())){
-						if (!isNull(root.getLeft()))
-							father.setLeft(root.getLeft());
-						else
-							father.setLeft(root.getRigth());
+			else  if (isFull(root)){ //dos hijos: reemplazar con el NMI del subarbol derecho
+					if (isNull(parent)) {//caso raiz
+						if (!isNull(root.getRigth().getLeft())) {
+							TNode tmp=root;
+							tmp=getNMI(tmp);
+							if(!isNull(tmp.getLeft())) {
+								TNode aux=tmp.getLeft();
+								tmp.setLeft(null);
+								aux.setLeft(root.getLeft());
+								aux.setRigth(root.getRigth());
+								setRoot(aux);
+							}
+							else {
+								tmp.setLeft(root.getLeft());
+								setRoot(tmp);
+							}
+						}
+						else {
+							root.getRigth().setLeft(root.getLeft());
+							setRoot(root.getRigth());
+						}
 					}
 					else {
-						if (!isNull(root.getLeft()))
-							father.setRigth(root.getLeft());
-						else
-							father.setRigth(root.getRigth());
+							
 						}
-				}
-		return true;
+						
+				}		
+				else { //un hijo : acomodar el puntero para ignorar el nodo borrado y alcanzar el hijo
+					if (isNull(parent)) {//caso raiz
+						if (existLeft(root))
+							setRoot(root.getLeft());
+						else 
+							setRoot(root.getRigth());
+					}
+					else if (isLeft(root,parent)){
+							if (existLeft(root))
+								parent.setLeft(root.getLeft());
+							else
+								parent.setLeft(root.getRigth());
+					}
+						else {
+							if (existLeft(root))
+								parent.setRigth(root.getLeft());
+							else
+								parent.setRigth(root.getRigth());
+							}
+					}
+			return true;
 		}
 		else if (getValueInt(root)>castInt(o)) 
 				return delete(o,root.getLeft(),root);
 		else return delete(o,root.getRigth(),root);
 	}	
+	
+	private TNode getNMI(TNode root) {
+		if(!isNull(root.getRigth())) {
+			root=root.getRigth();
+			while(!isNull(root.getLeft().getLeft())) {
+				root=root.getLeft();
+			}
+			return root;
+		}
+		else return root;
+	}
+	
+	private boolean existLeft(TNode root) {
+		return (!isNull(root.getLeft()));
+	}
+	
+	private boolean isLeft(TNode root, TNode father) {
+		return (existLeft(father)&& match(father.getLeft(),root.getInfo()));
+	}
 	
 	private boolean isFull(TNode root) {
 		return (!isNull(root.getLeft())&&!isNull(root.getRigth()));

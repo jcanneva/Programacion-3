@@ -41,7 +41,7 @@ public class MySimpleLinkedList implements Iterable<Object> {
 		return new Node(this.first.getInfo(),this.first.getNext());
 	}
 	
-	public boolean exists(int aux, MySimpleLinkedList list) {
+	public boolean exist(int aux, MySimpleLinkedList list) {
 		Iterator<Object> itr = list.iterator();
 		while (itr.hasNext()) {
 			if ((int) itr.next() == aux)
