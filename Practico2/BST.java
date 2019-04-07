@@ -2,11 +2,11 @@ package Practico2;
 
 import Practico1.MySimpleLinkedList;
 
-public class ABB {
+public class BST {
 
 	private TNode root;
 	
-	public ABB(TNode n) {
+	public BST(TNode n) {
 		this.root = n;	
 	}
 	
@@ -143,7 +143,7 @@ public class ABB {
 	
 	private boolean delete(Object o, TNode root, TNode parent) {	
 		if (match(root,o)) {
-			if (isHoja(root)) { //sin hijos
+			if (isLeaf(root)) { //sin hijos
 				if (isNull(parent)) //caso raiz
 					setRoot(null);
 				else if (isLeft(root,parent))
@@ -154,7 +154,7 @@ public class ABB {
 					if (isNull(parent)) {//caso raiz
 						if (!isNull(root.getRigth().getLeft())) {
 							TNode tmp=root;
-							tmp=getNMI(tmp);
+							tmp=getPointer(tmp);
 							if(!isNull(tmp.getLeft())) {
 								TNode aux=tmp.getLeft();
 								tmp.setLeft(null);
@@ -171,11 +171,47 @@ public class ABB {
 							root.getRigth().setLeft(root.getLeft());
 							setRoot(root.getRigth());
 						}
-					}
+					}//si no es el caso raiz
 					else {
-							
+						if (!isNull(root.getRigth().getLeft())) {
+							TNode tmp=root;
+							tmp=getPointer(tmp);
+							if(!isNull(tmp.getLeft())) {
+								TNode aux=tmp.getLeft();
+								tmp.setLeft(null);
+								if (!isLeft(root,parent)) {
+									parent.setRigth(aux);
+									aux.setRigth(root.getRigth());
+									aux.setLeft(root.getLeft());
+								}
+								else {
+									parent.setLeft(aux);
+									aux.setLeft(root.getLeft());
+									aux.setRigth(root.getRigth());
+								}
+							}
+							else {
+								if (!isLeft(root,parent)) {
+									parent.setRigth(tmp);
+									tmp.setLeft(root.getLeft());
+								}
+								else {
+									parent.setLeft(tmp);
+									tmp.setRigth(root.getRigth());
+								}
+							}
 						}
-						
+						else {
+							if (!isLeft(root,parent)) {
+								parent.setRigth(root.getRigth());
+								root.getRigth().setLeft(root.getLeft());
+							}
+							else {
+								parent.setLeft(root.getLeft());
+								root.getLeft().setRigth(root.getRigth());
+							}
+						}
+					}
 				}		
 				else { //un hijo : acomodar el puntero para ignorar el nodo borrado y alcanzar el hijo
 					if (isNull(parent)) {//caso raiz
@@ -204,7 +240,7 @@ public class ABB {
 		else return delete(o,root.getRigth(),root);
 	}	
 	
-	private TNode getNMI(TNode root) {
+	private TNode getPointer(TNode root) {
 		if(!isNull(root.getRigth())) {
 			root=root.getRigth();
 			while(!isNull(root.getLeft().getLeft())) {
@@ -227,7 +263,7 @@ public class ABB {
 		return (!isNull(root.getLeft())&&!isNull(root.getRigth()));
 	}
 	
-	private boolean isHoja(TNode root) {
+	private boolean isLeaf(TNode root) {
 		return (isNull(root.getLeft())&&isNull(root.getRigth()));
 	}
 

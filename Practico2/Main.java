@@ -16,35 +16,37 @@ public class Main {
 		Integer once=11;
 
 		TNode root= new TNode(seis);
-		ABB abb= new ABB(root);
+		BST bst= new BST(root);
 		
-		abb.insert(cuatro);
-		abb.insert(ocho);
-		abb.insert(siete);
-		abb.insert(nueve);
-		abb.insert(tres);
-		abb.insert(dos);
-		abb.insert(uno);
-		abb.insert(cinco);
-		abb.insert(diez);
+		bst.insert(cuatro);
+		bst.insert(nueve);
+		bst.insert(diez);
+		bst.insert(ocho);
+		bst.insert(siete);
+		bst.insert(tres);
+		bst.insert(dos);
+		bst.insert(uno);
+		bst.insert(cinco);
+		bst.insert(once);
+
 		
 		System.out.println("order");
-		abb.printInOrder();
+		bst.printInOrder();
 		System.out.println();
 		System.out.println("pre order");
-		abb.printPreOrder();
+		bst.printPreOrder();
 		System.out.println();
 		System.out.println("pos order");
-		abb.printPosOrder();
+		bst.printPosOrder();
 		System.out.println();
-		System.out.println("tres " + abb.hasElement(tres));
-		System.out.println("once " + abb.hasElement(once));
-		System.out.println("Min "+abb.getMinElem());
-		System.out.println("Max "+abb.getMaxElem());
-		System.out.println("Altura "+abb.getHeight());
+		System.out.println("tres " + bst.hasElement(tres));
+		System.out.println("once " + bst.hasElement(once));
+		System.out.println("Min "+bst.getMinElem());
+		System.out.println("Max "+bst.getMaxElem());
+		System.out.println("Altura "+bst.getHeight());
 		System.out.println();
-		System.out.println("elimina "+ abb.delete(seis));
+		System.out.println("elimina "+ bst.delete(diez));
 		System.out.println();
-		abb.printPreOrder();
+		bst.printInOrder();
 	}
 }
