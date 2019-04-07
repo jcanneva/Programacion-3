@@ -14,21 +14,22 @@ public class Main {
 		Integer nueve = 9;
 		Integer diez=10;
 		Integer once=11;
+		Integer doce=12;
 
-		TNode root= new TNode(seis);
+		TNode root= new TNode(ocho);
 		BST bst= new BST(root);
 		
 		bst.insert(cuatro);
+		bst.insert(once);
 		bst.insert(nueve);
-		bst.insert(diez);
-		bst.insert(ocho);
+		bst.insert(seis);
+		bst.insert(cinco);
 		bst.insert(siete);
 		bst.insert(tres);
 		bst.insert(dos);
 		bst.insert(uno);
-		bst.insert(cinco);
-		bst.insert(once);
-
+		bst.insert(diez);
+		bst.insert(doce);
 		
 		System.out.println("order");
 		bst.printInOrder();
@@ -45,7 +46,7 @@ public class Main {
 		System.out.println("Max "+bst.getMaxElem());
 		System.out.println("Altura "+bst.getHeight());
 		System.out.println();
-		System.out.println("elimina "+ bst.delete(diez));
+		System.out.println("elimina "+ bst.delete(once));
 		System.out.println();
 		bst.printInOrder();
 	}

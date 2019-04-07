@@ -143,8 +143,8 @@ public class BST {
 	
 	private boolean delete(Object o, TNode root, TNode parent) {	
 		if (match(root,o)) {
-			if (isLeaf(root)) { //sin hijos
-				if (isNull(parent)) //caso raiz
+			if (isLeaf(root)) { //es hoja==sin hijos
+				if (isNull(parent)) //sino tiene padres==raiz
 					setRoot(null);
 				else if (isLeft(root,parent))
 						parent.setLeft(null);
@@ -212,7 +212,7 @@ public class BST {
 							}
 						}
 					}
-				}		
+				}
 				else { //un hijo : acomodar el puntero para ignorar el nodo borrado y alcanzar el hijo
 					if (isNull(parent)) {//caso raiz
 						if (existLeft(root))
@@ -238,9 +238,10 @@ public class BST {
 		else if (getValueInt(root)>castInt(o)) 
 				return delete(o,root.getLeft(),root);
 		else return delete(o,root.getRigth(),root);
-	}	
+	}
 	
 	private TNode getPointer(TNode root) {
+		//devuelve el puntero del padre del nodo mas izquierdo del subarbol derecho 
 		if(!isNull(root.getRigth())) {
 			root=root.getRigth();
 			while(!isNull(root.getLeft().getLeft())) {
@@ -304,9 +305,15 @@ public class BST {
 	}
 
 	public MySimpleLinkedList getLongestBranch() {
-		return null;
+		
+		return getLongestBranch(this.root);
 	}
 
+	private MySimpleLinkedList getLongestBranch(TNode root) {
+		return null;
+	}
+	
+	
 	public MySimpleLinkedList getFrontera() {
 		return null;
 	}
