@@ -1,5 +1,9 @@
 package Practico2;
 
+import java.util.Iterator;
+
+import Practico1.MySimpleLinkedList;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -49,5 +53,19 @@ public class Main {
 		System.out.println("elimina "+ bst.delete(once));
 		System.out.println();
 		bst.printInOrder();
+		MySimpleLinkedList list1=new MySimpleLinkedList(); 
+		MySimpleLinkedList list2=new MySimpleLinkedList();
+		list1=bst.getFrontera();
+		Iterator<Object> itr1= list1.iterator();
+		System.out.println();
+		while(itr1.hasNext()) {
+			System.out.println(itr1.next());
+		}
+		System.out.println();
+		list2=bst.getLongestBranch();
+		Iterator<Object> itr2= list2.iterator();
+		while(itr2.hasNext()) {
+			System.out.println(itr2.next());
+		}
 	}
 }

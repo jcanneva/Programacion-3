@@ -135,6 +135,7 @@ public class BST {
 	}
 	
 	public boolean delete(Object o) {
+	
 		if (hasElement(o))
 			 return delete(o,this.root,null);
 		else 
@@ -143,7 +144,7 @@ public class BST {
 	
 	private boolean delete(Object o, TNode root, TNode parent) {	
 		if (match(root,o)) {
-			if (isLeaf(root)) { //es hoja==sin hijos
+			if (isChildLess(root)) { //es hoja==sin hijos
 				if (isNull(parent)) //sino tiene padres==raiz
 					setRoot(null);
 				else if (isLeft(root,parent))
@@ -264,7 +265,7 @@ public class BST {
 		return (!isNull(root.getLeft())&&!isNull(root.getRigth()));
 	}
 	
-	private boolean isLeaf(TNode root) {
+	private boolean isChildLess(TNode root) {
 		return (isNull(root.getLeft())&&isNull(root.getRigth()));
 	}
 
@@ -305,20 +306,54 @@ public class BST {
 	}
 
 	public MySimpleLinkedList getLongestBranch() {
-		
-		return getLongestBranch(this.root);
+		MySimpleLinkedList list=new MySimpleLinkedList();
+		return getLongestBranch(this.root, list);
 	}
 
-	private MySimpleLinkedList getLongestBranch(TNode root) {
-		return null;
+	private MySimpleLinkedList getLongestBranch(TNode root, MySimpleLinkedList list ) {
+		MySimpleLinkedList tmp= new MySimpleLinkedList();
+		TNode  left=root;
+		TNode rigth=root;
+		while(left!=null){
+			list.insertFront(left.getInfo());
+			left=left.getLeft();
+		}
+		while (rigth!=null) {
+			tmp.insertFront(rigth.getRigth());
+			rigth= rigth.getRigth();
+		}
+		if (list.size()>= tmp.size())
+				return list;
+		else
+			return tmp;
 	}
-	
 	
 	public MySimpleLinkedList getFrontera() {
-		return null;
+		MySimpleLinkedList list = new  MySimpleLinkedList();
+		this.getFrontera(this.root, list);
+		return list;
 	}
-
+	
+	private void getFrontera(TNode root, MySimpleLinkedList list) {
+		//corta con el 
+		if (isNull(root)){
+			return ;
+		}
+		if (isChildLess(root)) {
+			list.insertFront(root.getInfo());
+			return;
+		}
+		if (!isNull(root.getLeft()))
+			getFrontera(root.getLeft(),list);
+		if (!isNull(root.getRigth()))
+			getFrontera(root.getRigth(),list);
+	}
+	
 	public MySimpleLinkedList getElemAtLevel(int i) {
+		return getElemAtLevel(root,i);
+	}
+	
+	private MySimpleLinkedList getElemAtLevel(TNode root,int i) {
 		return null;
 	}
 }
