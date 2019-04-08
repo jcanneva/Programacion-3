@@ -101,7 +101,6 @@ public class MySimpleLinkedList implements Iterable<Object> {
 
 	public int size() {
 		return this.cant;
-
 	}
 
 	public Object get(int index) {

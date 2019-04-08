@@ -346,14 +346,31 @@ public class BST {
 		if (!isNull(root.getLeft()))
 			getFrontera(root.getLeft(),list);
 		if (!isNull(root.getRigth()))
-			getFrontera(root.getRigth(),list);
+			getFrontera(root.getRigth(),list); 
 	}
 	
 	public MySimpleLinkedList getElemAtLevel(int i) {
-		return getElemAtLevel(root,i);
+		MySimpleLinkedList list= new MySimpleLinkedList();
+		int lvl=1;
+		if (i<=this.getHeight())
+			getElemAtLevel(this.root,i,list,lvl);
+		return list;
 	}
 	
-	private MySimpleLinkedList getElemAtLevel(TNode root,int i) {
-		return null;
+	private void getElemAtLevel(TNode root,int i, MySimpleLinkedList list, int lvl) {
+		if (isNull(root)) {
+			return;
+		}
+		if (lvl==i) {
+			list.insertFront(root.getInfo());
+			return;
+		}
+		 if (!isNull(root.getLeft())) {
+			 lvl++;
+			 getElemAtLevel(root.getLeft(), i, list, lvl);
+			}
+		 if (!isNull(root.getRigth())) {
+			getElemAtLevel(root.getRigth(),i,list,lvl);
+		 }
 	}
 }
