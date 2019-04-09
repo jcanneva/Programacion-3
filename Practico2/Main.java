@@ -1,8 +1,8 @@
 package Practico2;
 
-import java.util.Iterator;
+//import java.util.Iterator;
 
-import Practico1.MySimpleLinkedList;
+//import Practico1.MySimpleLinkedList;
 
 
 public class Main {
@@ -46,34 +46,34 @@ public class Main {
 		bst.printPosOrder();
 		System.out.println();
 		System.out.println("tres " + bst.hasElement(tres));
-		System.out.println("once " + bst.hasElement(once));
+		System.out.println("once " + bst.hasElement(diez));
 		System.out.println("Min "+bst.getMinElem());
 		System.out.println("Max "+bst.getMaxElem());
 		System.out.println("Altura "+bst.getHeight());
 		System.out.println();
-//		System.out.println("elimina "+ bst.delete(once));
+		System.out.println("elimina "+ bst.delete(nueve));
 		System.out.println();
 		bst.printInOrder();
-		MySimpleLinkedList list1=new MySimpleLinkedList(); 
-		MySimpleLinkedList list2=new MySimpleLinkedList();
-		MySimpleLinkedList list3=new MySimpleLinkedList();
-		list1=bst.getFrontera();
-		Iterator<Object> itr= list1.iterator();
-		System.out.println();
-		while(itr.hasNext()) {
-			System.out.println(itr.next());
-		}
-		System.out.println();
-		list2=bst.getLongestBranch();
-		itr= list2.iterator();
-		while(itr.hasNext()) {
-			System.out.println(itr.next());
-		}
-		list3=bst.getElemAtLevel(4);
-		System.out.println();
-		itr= list3.iterator();
-		while(itr.hasNext()) {
-			System.out.println(itr.next());
-		}
+//		MySimpleLinkedList list1=new MySimpleLinkedList(); 
+//		MySimpleLinkedList list2=new MySimpleLinkedList();
+//		MySimpleLinkedList list3=new MySimpleLinkedList();
+//		list1=bst.getFrontera();
+//		Iterator<Object> itr= list1.iterator();
+//		System.out.println();
+//		while(itr.hasNext()) {
+//			System.out.println(itr.next());
+//		}
+//		System.out.println();
+//		list2=bst.getLongestBranch();
+//		itr= list2.iterator();
+//		while(itr.hasNext()) {
+//			System.out.println(itr.next());
+//		}
+//		list3=bst.getElemAtLevel(4);
+//		System.out.println();
+//		itr= list3.iterator();
+//		while(itr.hasNext()) {
+//			System.out.println(itr.next());
+//		}
 	}
 }

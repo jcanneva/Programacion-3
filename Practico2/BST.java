@@ -49,7 +49,6 @@ public class BST {
 		// Si es null llego a la hoja, no lo encontro y retorna false
 		// si coincide retorno true
 		// si es menor busca en el subarbol izquierdo y si es mayor en el derecho
-	
 		if (isNull(root)) 
 			return false;
 		else {	
@@ -135,11 +134,88 @@ public class BST {
 	}
 	
 	public boolean delete(Object o) {
-	
 		if (hasElement(o))
 			 return delete(o,this.root,null);
 		else 
 			return false;
+	}
+	
+	private void replaceLeaf(TNode root, TNode parent) {
+		//reemplazar una hoja
+		if (isLeft(root,parent))
+			parent.setLeft(null);
+		else parent.setRigth(null);
+	}
+	
+	
+	private void replaceOneChildRoot(TNode root) {
+		//caso raiz de un hijo
+		if (existLeft(root))
+			setRoot(root.getLeft());
+		else 
+			setRoot(root.getRigth());
+	}
+	
+	private void replaceOneChildLeft(TNode root, TNode parent) {
+		//caso izquierdo de un hijo
+		if (existLeft(root))
+			parent.setLeft(root.getLeft());
+		else 
+			parent.setLeft(root.getRigth());
+	}
+	
+	private void replaceOneChildRigth(TNode root, TNode parent) {
+		//caso derecho de un hijo
+		if (existLeft(root))
+			parent.setRigth(root.getLeft());
+		else 
+			parent.setRigth(root.getRigth());
+	}
+	
+	private void replaceFullChildRoot(TNode root) {
+		if (!isNull(root.getRigth().getLeft())) { //si hay un nodo mas izquierdo(NMI) a la derecha lo busco al padre
+			TNode tmp=root;
+			tmp=getPointer(tmp);//padre del NMI
+			TNode aux=tmp.getLeft(); //NMI
+			tmp.setLeft(null);
+			aux.setLeft(root.getLeft());
+			aux.setRigth(root.getRigth());
+			setRoot(aux);
+		}
+		else {//si no hay NMI
+			root.getRigth().setLeft(root.getLeft());
+			setRoot(root.getRigth());
+		}
+	}
+	
+	public void replaceFullChild(TNode root, TNode parent) {
+		//si no hay NMI cambio con el puntero derecho
+		if (!isLeft(root,parent)) {//si el hijo es derecho
+			parent.setRigth(root.getRigth());
+			root.getRigth().setLeft(root.getLeft());
+		}
+		else {//si es izquierdo
+			parent.setLeft(root.getLeft());
+			root.getLeft().setRigth(root.getRigth());
+		}
+	}
+	
+	private void replaceFullChildNMI(TNode root, TNode parent) {
+		//si hay un NMI a la derecha busco el padre y cambio los punteros
+		TNode tmp=root;
+		tmp=getPointer(tmp);//padre NMI
+		TNode aux=tmp.getLeft();//NMI
+		tmp.setLeft(null);//borro el puntero del padre(NMI)
+		if (!isLeft(root,parent)) {//si el nodo a borrar no es hijo izquierdo 
+			parent.setRigth(aux);
+			aux.setRigth(root.getRigth());
+			aux.setLeft(root.getLeft());
+		}
+		else { //si es izquierdo
+			parent.setLeft(aux);
+			aux.setLeft(root.getLeft());
+			aux.setRigth(root.getRigth());
+		}
 	}
 	
 	private boolean delete(Object o, TNode root, TNode parent) {	
@@ -147,92 +223,27 @@ public class BST {
 			if (isChildLess(root)) { //es hoja==sin hijos
 				if (isNull(parent)) //sino tiene padres==raiz
 					setRoot(null);
-				else if (isLeft(root,parent))
-						parent.setLeft(null);
-					else parent.setRigth(null);
+				else replaceLeaf(root,parent);
 			}
 			else  if (isFull(root)){ //dos hijos: reemplazar con el NMI del subarbol derecho
 					if (isNull(parent)) {//caso raiz
-						if (!isNull(root.getRigth().getLeft())) {
-							TNode tmp=root;
-							tmp=getPointer(tmp);
-							if(!isNull(tmp.getLeft())) {
-								TNode aux=tmp.getLeft();
-								tmp.setLeft(null);
-								aux.setLeft(root.getLeft());
-								aux.setRigth(root.getRigth());
-								setRoot(aux);
-							}
-							else {
-								tmp.setLeft(root.getLeft());
-								setRoot(tmp);
-							}
-						}
-						else {
-							root.getRigth().setLeft(root.getLeft());
-							setRoot(root.getRigth());
-						}
+						replaceFullChildRoot(root);
 					}//si no es el caso raiz
 					else {
-						if (!isNull(root.getRigth().getLeft())) {
-							TNode tmp=root;
-							tmp=getPointer(tmp);
-							if(!isNull(tmp.getLeft())) {
-								TNode aux=tmp.getLeft();
-								tmp.setLeft(null);
-								if (!isLeft(root,parent)) {
-									parent.setRigth(aux);
-									aux.setRigth(root.getRigth());
-									aux.setLeft(root.getLeft());
-								}
-								else {
-									parent.setLeft(aux);
-									aux.setLeft(root.getLeft());
-									aux.setRigth(root.getRigth());
-								}
-							}
-							else {
-								if (!isLeft(root,parent)) {
-									parent.setRigth(tmp);
-									tmp.setLeft(root.getLeft());
-								}
-								else {
-									parent.setLeft(tmp);
-									tmp.setRigth(root.getRigth());
-								}
-							}
-						}
-						else {
-							if (!isLeft(root,parent)) {
-								parent.setRigth(root.getRigth());
-								root.getRigth().setLeft(root.getLeft());
-							}
-							else {
-								parent.setLeft(root.getLeft());
-								root.getLeft().setRigth(root.getRigth());
-							}
-						}
+						if (isNull(root.getRigth().getLeft()))//sin NMI
+							replaceFullChild(root,parent);
+						else //con NMI 
+							replaceFullChildNMI(root,parent);
 					}
 				}
 				else { //un hijo : acomodar el puntero para ignorar el nodo borrado y alcanzar el hijo
-					if (isNull(parent)) {//caso raiz
-						if (existLeft(root))
-							setRoot(root.getLeft());
-						else 
-							setRoot(root.getRigth());
-					}
-					else if (isLeft(root,parent)){
-							if (existLeft(root))
-								parent.setLeft(root.getLeft());
-							else
-								parent.setLeft(root.getRigth());
-					}
-						else {
-							if (existLeft(root))
-								parent.setRigth(root.getLeft());
-							else
-								parent.setRigth(root.getRigth());
-							}
+					if (isNull(parent)) //caso raiz
+						replaceOneChildRoot(root);
+					else if (isLeft(root,parent)) //caso hijo izquierdo
+							replaceOneChildLeft(root,parent);
+						else //caso hijo derecho
+							replaceOneChildRigth(root,parent);
+		
 					}
 			return true;
 		}
@@ -358,19 +369,21 @@ public class BST {
 	}
 	
 	private void getElemAtLevel(TNode root,int i, MySimpleLinkedList list, int lvl) {
+		//no imprime el ultimo elemento del cuarto nivel
 		if (isNull(root)) {
 			return;
 		}
-		if (lvl==i) {
+		else if (lvl==i) {
 			list.insertFront(root.getInfo());
 			return;
 		}
-		 if (!isNull(root.getLeft())) {
-			 lvl++;
-			 getElemAtLevel(root.getLeft(), i, list, lvl);
+		else {
+			if (!isNull(root.getLeft())) {
+				lvl++;
+				getElemAtLevel(root.getLeft(), i, list, lvl);
 			}
-		 if (!isNull(root.getRigth())) {
-			getElemAtLevel(root.getRigth(),i,list,lvl);
-		 }
+			if (!isNull(root.getRigth())) 
+				getElemAtLevel(root.getRigth(),i,list,lvl);
+			}
 	}
 }
