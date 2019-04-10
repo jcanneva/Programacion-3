@@ -133,13 +133,6 @@ public class BST {
 		else return null;
 	}
 	
-	public boolean delete(Object o) {
-		if (hasElement(o))
-			 return delete(o,this.root,null);
-		else 
-			return false;
-	}
-	
 	private void replaceLeaf(TNode root, TNode parent) {
 		//reemplazar una hoja
 		if (isLeft(root,parent))
@@ -175,7 +168,7 @@ public class BST {
 	private void replaceFullChildRoot(TNode root) {
 		if (!isNull(root.getRigth().getLeft())) { //si hay un nodo mas izquierdo(NMI) a la derecha lo busco al padre
 			TNode tmp=root;
-			tmp=getPointer(tmp);//padre del NMI
+			tmp=getParentNMI(tmp);//padre del NMI
 			TNode aux=tmp.getLeft(); //NMI
 			tmp.setLeft(null);
 			aux.setLeft(root.getLeft());
@@ -203,7 +196,7 @@ public class BST {
 	private void replaceFullChildNMI(TNode root, TNode parent) {
 		//si hay un NMI a la derecha busco el padre y cambio los punteros
 		TNode tmp=root;
-		tmp=getPointer(tmp);//padre NMI
+		tmp=getParentNMI(tmp);//padre NMI
 		TNode aux=tmp.getLeft();//NMI
 		tmp.setLeft(null);//borro el puntero del padre(NMI)
 		if (!isLeft(root,parent)) {//si el nodo a borrar no es hijo izquierdo 
@@ -216,6 +209,13 @@ public class BST {
 			aux.setLeft(root.getLeft());
 			aux.setRigth(root.getRigth());
 		}
+	}
+	
+	public boolean delete(Object o) {
+		if (hasElement(o))
+			 return delete(o,this.root,null);
+		else 
+			return false;
 	}
 	
 	private boolean delete(Object o, TNode root, TNode parent) {	
@@ -252,7 +252,7 @@ public class BST {
 		else return delete(o,root.getRigth(),root);
 	}
 	
-	private TNode getPointer(TNode root) {
+	private TNode getParentNMI(TNode root) {
 		//devuelve el puntero del padre del nodo mas izquierdo del subarbol derecho 
 		if(!isNull(root.getRigth())) {
 			root=root.getRigth();
@@ -322,21 +322,10 @@ public class BST {
 	}
 
 	private MySimpleLinkedList getLongestBranch(TNode root, MySimpleLinkedList list ) {
-		MySimpleLinkedList tmp= new MySimpleLinkedList();
-		TNode  left=root;
-		TNode rigth=root;
-		while(left!=null){
-			list.insertFront(left.getInfo());
-			left=left.getLeft();
-		}
-		while (rigth!=null) {
-			tmp.insertFront(rigth.getRigth());
-			rigth= rigth.getRigth();
-		}
-		if (list.size()>= tmp.size())
-				return list;
-		else
-			return tmp;
+	if (isNull(root))
+		return list;
+	
+		return list;
 	}
 	
 	public MySimpleLinkedList getFrontera() {
@@ -369,21 +358,20 @@ public class BST {
 	}
 	
 	private void getElemAtLevel(TNode root,int i, MySimpleLinkedList list, int lvl) {
-		//no imprime el ultimo elemento del cuarto nivel
+		//no retorna el ultimo elemento
 		if (isNull(root)) {
-			return;
+			return ;
 		}
-		else if (lvl==i) {
+		if (lvl==i) {
 			list.insertFront(root.getInfo());
-			return;
+			return ;
 		}
-		else {
-			if (!isNull(root.getLeft())) {
-				lvl++;
-				getElemAtLevel(root.getLeft(), i, list, lvl);
-			}
-			if (!isNull(root.getRigth())) 
-				getElemAtLevel(root.getRigth(),i,list,lvl);
-			}
+		lvl++;
+		if (!isNull(root.getLeft())) {
+			getElemAtLevel(root.getLeft(), i, list, lvl);
+		} 
+		if (!isNull(root.getRigth()))
+			getElemAtLevel(root.getRigth(),i,list,lvl);
+			
 	}
 }

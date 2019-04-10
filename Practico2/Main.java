@@ -1,8 +1,8 @@
 package Practico2;
 
-//import java.util.Iterator;
+import java.util.Iterator;
 
-//import Practico1.MySimpleLinkedList;
+import Practico1.MySimpleLinkedList;
 
 
 public class Main {
@@ -20,11 +20,12 @@ public class Main {
 		Integer diez=10;
 		Integer once=11;
 		Integer doce=12;
-
+		Integer trece=13;
 		TNode root= new TNode(ocho);
 		BST bst= new BST(root);
 		
 		bst.insert(cuatro);
+		bst.insert(trece);
 		bst.insert(once);
 		bst.insert(nueve);
 		bst.insert(seis);
@@ -51,14 +52,14 @@ public class Main {
 		System.out.println("Max "+bst.getMaxElem());
 		System.out.println("Altura "+bst.getHeight());
 		System.out.println();
-		System.out.println("elimina "+ bst.delete(nueve));
+//		System.out.println("elimina "+ bst.delete(trece));
 		System.out.println();
 		bst.printInOrder();
 //		MySimpleLinkedList list1=new MySimpleLinkedList(); 
-//		MySimpleLinkedList list2=new MySimpleLinkedList();
-//		MySimpleLinkedList list3=new MySimpleLinkedList();
+		MySimpleLinkedList list2=new MySimpleLinkedList();
+		MySimpleLinkedList list3=new MySimpleLinkedList();
 //		list1=bst.getFrontera();
-//		Iterator<Object> itr= list1.iterator();
+		Iterator<Object> itr= list2.iterator();
 //		System.out.println();
 //		while(itr.hasNext()) {
 //			System.out.println(itr.next());
@@ -69,11 +70,11 @@ public class Main {
 //		while(itr.hasNext()) {
 //			System.out.println(itr.next());
 //		}
-//		list3=bst.getElemAtLevel(4);
-//		System.out.println();
-//		itr= list3.iterator();
-//		while(itr.hasNext()) {
-//			System.out.println(itr.next());
-//		}
+		list3=bst.getElemAtLevel(cinco);
+		System.out.println();
+		itr= list3.iterator();
+		while(itr.hasNext()) {
+			System.out.println(itr.next());
+		}
 	}
 }
