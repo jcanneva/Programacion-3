@@ -46,32 +46,37 @@ public class Main {
 		System.out.println("pos order");
 		bst.printPosOrder();
 		System.out.println();
+		System.out.println();
 		System.out.println("tres " + bst.hasElement(tres));
 		System.out.println("once " + bst.hasElement(diez));
 		System.out.println("Min "+bst.getMinElem());
 		System.out.println("Max "+bst.getMaxElem());
 		System.out.println("Altura "+bst.getHeight());
 		System.out.println();
-//		System.out.println("elimina "+ bst.delete(trece));
+		System.out.println("elimina "+ bst.delete(trece));
 		System.out.println();
 		bst.printInOrder();
-//		MySimpleLinkedList list1=new MySimpleLinkedList(); 
-		MySimpleLinkedList list2=new MySimpleLinkedList();
+		MySimpleLinkedList list1=new MySimpleLinkedList(); 
+//		MySimpleLinkedList list2=new MySimpleLinkedList();
 		MySimpleLinkedList list3=new MySimpleLinkedList();
-//		list1=bst.getFrontera();
-		Iterator<Object> itr= list2.iterator();
+		list1=bst.getFrontera();
+		Iterator<Object> itr= list1.iterator();
+		System.out.println();
+		System.out.println();
+		System.out.println("Get frontera");
+		while(itr.hasNext()) {
+			System.out.println(itr.next());
+		}
 //		System.out.println();
-//		while(itr.hasNext()) {
-//			System.out.println(itr.next());
-//		}
-//		System.out.println();
+//		System.out.println("Get longest branch");
 //		list2=bst.getLongestBranch();
 //		itr= list2.iterator();
 //		while(itr.hasNext()) {
 //			System.out.println(itr.next());
 //		}
-		list3=bst.getElemAtLevel(cinco);
+		list3=bst.getElemAtLevel(cuatro);
 		System.out.println();
+		System.out.println("Get element at lvl 4");
 		itr= list3.iterator();
 		while(itr.hasNext()) {
 			System.out.println(itr.next());

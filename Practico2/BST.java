@@ -140,7 +140,6 @@ public class BST {
 		else parent.setRigth(null);
 	}
 	
-	
 	private void replaceOneChildRoot(TNode root) {
 		//caso raiz de un hijo
 		if (existLeft(root))
@@ -287,7 +286,8 @@ public class BST {
 	private void printPreOrder(TNode root) {
 		if (isNull(root))
 			return;
-		System.out.println(getValueInt(root));
+		System.out.print(getValueInt(root));
+		System.out.print("  ");
 		printPreOrder(root.getLeft());
 		printPreOrder(root.getRigth());
 	}
@@ -301,7 +301,8 @@ public class BST {
 			return;
 		printPosOrder(root.getLeft());
 		printPosOrder(root.getRigth());
-		System.out.println(getValueInt(root));
+		System.out.print(getValueInt(root));
+		System.out.print("  ");
 	}
 
 	public void printInOrder() {
@@ -312,7 +313,8 @@ public class BST {
 		if (isNull(root))
 			return;
 		printInOrder(root.getLeft());
-		System.out.println(getValueInt(root));
+		System.out.print(getValueInt(root));
+		System.out.print("  ");
 		printInOrder(root.getRigth());
 	}
 
@@ -323,9 +325,7 @@ public class BST {
 	}
 
 	private void getLongestBranch(TNode root, MySimpleLinkedList list ) {
-	if (isNull(root))
-		return;
-	
+//		MySimpleLinkedList tmp= new MySimpleLinkedList();
 	}
 	
 	public MySimpleLinkedList getFrontera() {
@@ -358,7 +358,6 @@ public class BST {
 	}
 	
 	private void getElemAtLevel(TNode root,int i, MySimpleLinkedList list, int lvl) {
-		//no retorna el ultimo elemento
 		if (isNull(root)) {
 			return ;
 		}
@@ -371,6 +370,5 @@ public class BST {
 			getElemAtLevel(root.getLeft(), i, list, lvl);
 		if (!isNull(root.getRigth()))
 			getElemAtLevel(root.getRigth(),i,list,lvl);
-			
 	}
 }
