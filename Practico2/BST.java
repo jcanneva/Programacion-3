@@ -318,14 +318,14 @@ public class BST {
 
 	public MySimpleLinkedList getLongestBranch() {
 		MySimpleLinkedList list=new MySimpleLinkedList();
-		return getLongestBranch(this.root, list);
+		getLongestBranch(this.root, list);
+		return list;
 	}
 
-	private MySimpleLinkedList getLongestBranch(TNode root, MySimpleLinkedList list ) {
+	private void getLongestBranch(TNode root, MySimpleLinkedList list ) {
 	if (isNull(root))
-		return list;
+		return;
 	
-		return list;
 	}
 	
 	public MySimpleLinkedList getFrontera() {
@@ -367,9 +367,8 @@ public class BST {
 			return ;
 		}
 		lvl++;
-		if (!isNull(root.getLeft())) {
+		if (!isNull(root.getLeft())) 
 			getElemAtLevel(root.getLeft(), i, list, lvl);
-		} 
 		if (!isNull(root.getRigth()))
 			getElemAtLevel(root.getRigth(),i,list,lvl);
 			
