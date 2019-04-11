@@ -319,13 +319,23 @@ public class BST {
 	}
 
 	public MySimpleLinkedList getLongestBranch() {
-		MySimpleLinkedList list=new MySimpleLinkedList();
-		getLongestBranch(this.root, list);
-		return list;
+		MySimpleLinkedList left=new MySimpleLinkedList();
+		MySimpleLinkedList rigth=new MySimpleLinkedList();
+		getLongestBranch(this.root.getLeft(), left);
+		getLongestBranch(this.root.getRigth(), rigth);
+		if (left.size()>rigth.size())
+			return left;
+		else
+			return rigth;
 	}
 
 	private void getLongestBranch(TNode root, MySimpleLinkedList list ) {
-//		MySimpleLinkedList tmp= new MySimpleLinkedList();
+		if (isNull(root)) 
+			return;
+		else 
+			list.insertFront(root.getInfo());
+		getLongestBranch(root.getLeft(),list);
+		getLongestBranch(root.getRigth(),list);
 	}
 	
 	public MySimpleLinkedList getFrontera() {

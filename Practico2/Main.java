@@ -31,9 +31,9 @@ public class Main {
 		bst.insert(seis);
 		bst.insert(cinco);
 		bst.insert(siete);
-		bst.insert(tres);
-		bst.insert(dos);
-		bst.insert(uno);
+//		bst.insert(tres);
+//		bst.insert(dos);
+//		bst.insert(uno);
 		bst.insert(diez);
 		bst.insert(doce);
 		
@@ -57,7 +57,7 @@ public class Main {
 		System.out.println();
 		bst.printInOrder();
 		MySimpleLinkedList list1=new MySimpleLinkedList(); 
-//		MySimpleLinkedList list2=new MySimpleLinkedList();
+		MySimpleLinkedList list2=new MySimpleLinkedList();
 		MySimpleLinkedList list3=new MySimpleLinkedList();
 		list1=bst.getFrontera();
 		Iterator<Object> itr= list1.iterator();
@@ -67,13 +67,13 @@ public class Main {
 		while(itr.hasNext()) {
 			System.out.println(itr.next());
 		}
-//		System.out.println();
-//		System.out.println("Get longest branch");
-//		list2=bst.getLongestBranch();
-//		itr= list2.iterator();
-//		while(itr.hasNext()) {
-//			System.out.println(itr.next());
-//		}
+		System.out.println();
+		System.out.println("Get longest branch");
+		list2=bst.getLongestBranch();
+		itr= list2.iterator();
+		while(itr.hasNext()) {
+			System.out.println(itr.next());
+		}
 		list3=bst.getElemAtLevel(cuatro);
 		System.out.println();
 		System.out.println("Get element at lvl 4");
