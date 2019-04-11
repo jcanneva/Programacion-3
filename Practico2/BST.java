@@ -345,7 +345,6 @@ public class BST {
 	}
 	
 	private void getFrontera(TNode root, MySimpleLinkedList list) {
-		//corta con el 
 		if (isNull(root)){
 			return ;
 		}
