@@ -24,16 +24,16 @@ public class Main {
 		TNode root= new TNode(ocho);
 		BST bst= new BST(root);
 		
-		bst.insert(cuatro);
+		bst.insert(tres);
 		bst.insert(trece);
 		bst.insert(once);
 		bst.insert(nueve);
 		bst.insert(seis);
 		bst.insert(cinco);
 		bst.insert(siete);
-//		bst.insert(tres);
-//		bst.insert(dos);
-//		bst.insert(uno);
+		bst.insert(cuatro);
+		bst.insert(dos);
+		bst.insert(uno);
 		bst.insert(diez);
 		bst.insert(doce);
 		
@@ -55,7 +55,7 @@ public class Main {
 		System.out.println();
 		System.out.println("elimina "+ bst.delete(trece));
 		System.out.println();
-		bst.printInOrder();
+		bst.printPreOrder();
 		MySimpleLinkedList list1=new MySimpleLinkedList(); 
 		MySimpleLinkedList list2=new MySimpleLinkedList();
 		MySimpleLinkedList list3=new MySimpleLinkedList();

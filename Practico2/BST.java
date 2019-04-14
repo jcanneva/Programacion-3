@@ -288,6 +288,10 @@ public class BST {
 			return;
 		System.out.print(getValueInt(root));
 		System.out.print("  ");
+		if(isNull(root.getLeft()))
+			System.out.print("- ");
+		if(isNull(root.getRigth()))
+			System.out.print("- ");
 		printPreOrder(root.getLeft());
 		printPreOrder(root.getRigth());
 	}
@@ -323,7 +327,7 @@ public class BST {
 		MySimpleLinkedList rigth=new MySimpleLinkedList();
 		getLongestBranch(this.root.getLeft(), left);
 		getLongestBranch(this.root.getRigth(), rigth);
-		if (left.size()>rigth.size())
+		if (left.size()>=rigth.size())
 			return left;
 		else
 			return rigth;
