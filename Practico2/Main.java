@@ -64,22 +64,19 @@ public class Main {
 		System.out.println();
 		System.out.println();
 		System.out.println("Get frontera");
-		while(itr.hasNext()) {
+		while(itr.hasNext()) 
 			System.out.println(itr.next());
-		}
 		System.out.println();
 		System.out.println("Get longest branch");
 		list2=bst.getLongestBranch();
 		itr= list2.iterator();
-		while(itr.hasNext()) {
+		while(itr.hasNext()) 
 			System.out.println(itr.next());
-		}
 		list3=bst.getElemAtLevel(cuatro);
 		System.out.println();
 		System.out.println("Get element at lvl 4");
 		itr= list3.iterator();
-		while(itr.hasNext()) {
+		while(itr.hasNext()) 
 			System.out.println(itr.next());
-		}
 	}
 }

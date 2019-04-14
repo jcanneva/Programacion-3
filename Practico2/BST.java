@@ -87,9 +87,8 @@ public class BST {
 					insert(root.getRigth(),o);	
 			}
 		}
-		else {
+	//	else 
 			//si el valor es igual se puede hacer una lista con los valores repetidos
-		}
 	}
 
 	public int getHeight() {
