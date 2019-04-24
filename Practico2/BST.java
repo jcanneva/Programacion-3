@@ -336,7 +336,7 @@ public class BST {
 		if (isNull(root)) 
 			return;
 		else 
-			list.insertFront(root.getInfo());
+			list.insertLast(root.getInfo());
 		getLongestBranch(root.getLeft(),list);
 		getLongestBranch(root.getRigth(),list);
 	}
@@ -352,7 +352,7 @@ public class BST {
 			return ;
 		}
 		if (isChildLess(root)) {
-			list.insertFront(root.getInfo());
+			list.insertLast(root.getInfo());
 			return;
 		}
 		if (!isNull(root.getLeft()))
@@ -374,7 +374,7 @@ public class BST {
 			return ;
 		}
 		if (lvl==i) {
-			list.insertFront(root.getInfo());
+			list.insertLast(root.getInfo());
 			return ;
 		}
 		lvl++;

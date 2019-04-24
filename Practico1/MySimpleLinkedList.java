@@ -41,8 +41,8 @@ public class MySimpleLinkedList implements Iterable<Object> {
 		return new Node(this.first.getInfo(),this.first.getNext());
 	}
 	
-	public boolean exist(int aux, MySimpleLinkedList list) {
-		Iterator<Object> itr = list.iterator();
+	public boolean exist(int aux) {
+		Iterator<Object> itr = this.iterator();
 		while (itr.hasNext()) {
 			if ((int) itr.next() == aux)
 				return true;
@@ -81,16 +81,14 @@ public class MySimpleLinkedList implements Iterable<Object> {
 	}
 
 	public void insertLast(Object o) {
-		Node last = new Node(o, null);
 		if (this.isEmpty()) {
-			this.first=last;
-			this.cant++;
+			insertFront(o);
 		} else {
 			Node tmp = this.first;
-			while (tmp.getNext() != null) {
-				tmp.getNext();
-			}
-			tmp.setNext(last);
+			while (tmp.getNext() != null) 
+				tmp=tmp.getNext();
+			Node insert= new Node(o,null);
+			tmp.setNext(insert);
 			this.cant++;
 		}
 	}

@@ -45,4 +45,8 @@ public class Grafo {
 		v.setEstado(TERMINADO);
 	}
 	
+	public void BFS() {
+		
+	}
+	
 }
