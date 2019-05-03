@@ -38,21 +38,20 @@ public class Grafo {
 	public LinkedList<Reserva> getReservas() {
 		return new LinkedList<Reserva>(reservas);
 	}
-
-	public void setReservas(LinkedList<Reserva> r) {
-		this.reservas = r;
-	}
 	
 	public void addReserva(Reserva r) {
 		this.reservas.add(r);
+		Ruta ruta = this.getRuta(r.getOrigen(), r.getDestino(), r.getAerolinea());
+		if(ruta!=null)
+			ruta.addReserva(r);
 	}
 
 	public void addRuta(Ruta origen) {
 		this.rutas.add(origen);
-		Aeropuerto o = getAeropuerto(origen.getOrigen());
+		Aeropuerto o = getAeropuerto(origen.getOrigen().getNombre());
 		if (o!=null) {
 			o.addRuta(origen);
-			Ruta destino = new Ruta(origen.getDestino().getNombre(),o,origen.getDistancia(),origen.getCabotaje());
+			Ruta destino = new Ruta(origen.getDestino(),origen.getOrigen(),origen.getDistancia(),origen.getCabotaje());
 			destino.setAerolineas(origen.getAerolineas());
 			this.rutas.add(destino);
 			Aeropuerto d = getAeropuerto(origen.getDestino().getNombre());
@@ -79,9 +78,20 @@ public class Grafo {
 		ListIterator<Ruta> itr = this.rutas.listIterator();
 		while(itr.hasNext()) {
 			Ruta a =itr.next();
-			if(a.getOrigen().equals(origen)&&a.getDestino().getNombre().equals(destino)
+			if(a.getOrigen().getNombre().equals(origen)&&a.getDestino().getNombre().equals(destino)
 					&&a.getAerolineas().containsKey(aerolinea))
 				return a;		
+		}
+		return null;
+	}
+	
+	public Reserva getReserva(Ruta r) {
+		ListIterator<Reserva> itr =this.reservas.listIterator();
+		while (itr.hasNext()) {
+			Reserva re = itr.next();
+			if(re.getOrigen().equals(r.getOrigen().getNombre())&&re.getDestino().equals(r.getDestino().getNombre())
+					&&r.getAerolineas().containsKey(re.getAerolinea()))
+				return re;
 		}
 		return null;
 	}

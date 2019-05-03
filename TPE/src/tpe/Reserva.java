@@ -48,7 +48,7 @@ public class Reserva {
 
 	@Override
 	public String toString() {
-		return "1)Origen: " + origen + " 2)Destino: " + destino + " 3)Aerolinea: " + aerolinea + " 4)Reservas: "+ reservas;
+		return "1)Origen: " + origen + " Destino: " + destino + " 2)Aerolinea: " + aerolinea + " Reservas: "+ reservas;
 	}
 	
 	

@@ -9,9 +9,9 @@ import java.util.ListIterator;
 public class Main {
 	
 	public static void CSVReader(Grafo grafo) {
-		String csvAeropuerto = "C:/Users/jcann/TPE/src/tpe/Dataset/Aeropuertos.csv";
-		String csvRutas = "C:/Users/jcann/TPE/src/tpe/Dataset/Rutas.csv";
-		String csvReservas = "C:/Users/jcann/TPE/src/tpe/Dataset/Reservas.csv";
+		String csvAeropuerto = "/home/webtudai/Descargas/Programacion-3-master/TPE/src/tpe/Dataset/Aeropuertos.csv";
+		String csvRutas = "/home/webtudai/Descargas/Programacion-3-master/TPE/src/tpe/Dataset/Rutas.csv";
+		String csvReservas = "/home/webtudai/Descargas/Programacion-3-master/TPE/src/tpe/Dataset/Reservas.csv";
 		String line = "";
 		String cvsSplitBy = ";";
 
@@ -33,8 +33,8 @@ public class Main {
 
 			while ((line = br.readLine()) != null) {
 				String[] items = line.split(cvsSplitBy);
-				String nombre_destino = items[1];
-				Aeropuerto destino = grafo.getAeropuerto(nombre_destino);
+				Aeropuerto origen = grafo.getAeropuerto(items[0]);
+				Aeropuerto destino = grafo.getAeropuerto(items[1]);
 				double distancia = Double.parseDouble(items[2]);
 				boolean cabotaje;
 				if (items[3].contains("1")) {
@@ -42,7 +42,7 @@ public class Main {
 					;
 				} else
 					cabotaje = false;
-				Ruta r = new Ruta(items[0], destino, distancia, cabotaje);
+				Ruta r = new Ruta(origen, destino, distancia, cabotaje);
 				String linea1 = items[4];
 				String split = "\\{|,|-|}|/";
 				String[] items2 = linea1.split(split);
@@ -79,17 +79,54 @@ public class Main {
 	public static void main(String[] args) {
 		Grafo grafo = new Grafo();
 		CSVReader(grafo);
+		
+		//1
 		LinkedList<Aeropuerto> a = new LinkedList<Aeropuerto>(grafo.getAeropuertos());
 		ListIterator<Aeropuerto> itr = a.listIterator();
 		System.out.println("Aeropuertos:");
 		while (itr.hasNext())
 			System.out.println(itr.next().toString());
 		
+//		LinkedList<Ruta> rutas = new LinkedList<Ruta>(grafo.getRutas());
+//		ListIterator<Ruta> itr1 = rutas.listIterator();
+//		System.out.println("Rutas:");
+//		while (itr1.hasNext())
+//			System.out.println(itr1.next().toString());
+		
+		//2
 		LinkedList<Reserva> reservas = new LinkedList<Reserva>(grafo.getReservas());
 		ListIterator<Reserva> itr2 = reservas.listIterator();
 		System.out.println("Reservas:");
 		while (itr2.hasNext())
 			System.out.println(itr2.next().toString());
+		
+		//3
+		String origen="Jorge Chavez";
+		String destino="Pucon";
+		String aerolinea="LATAM";
+		Ruta r = grafo.getRuta(origen, destino, aerolinea);
+		if(r!=null) {
+			System.out.println("existe");
+			Reserva re = r.getReserva(aerolinea);
+			if (re!=null) {
+				System.out.println(origen);
+				System.out.println(destino);
+				System.out.println(aerolinea);
+				System.out.println(r.getDistancia());
+				System.out.println(r.getAerolineas().get(aerolinea)-re.getReservas());
+			}
+			else {
+				System.out.println(origen);
+				System.out.println(destino);
+				System.out.println(aerolinea);
+				System.out.println(r.getDistancia());
+				System.out.println(r.getAerolineas().get(aerolinea));
+			}
+		}else {
+			System.out.println("no existe");	
+		}
+		
+		//4
 		
 	}
 }

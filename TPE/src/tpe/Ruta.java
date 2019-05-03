@@ -1,25 +1,43 @@
 package tpe;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class Ruta {
 
-	String origen; 
+	LinkedList<Reserva> reservas;
+	Aeropuerto origen; 
 	Aeropuerto destino; 
 	double distancia;
 	boolean cabotaje;
 	HashMap<String,Integer> aerolineas;
 	
-	public Ruta (String origen, Aeropuerto destino, double d, boolean c) {
+	public Ruta (Aeropuerto origen, Aeropuerto destino, double d, boolean c) {
 		this.setOrigen(origen);
 		this.setDestino(destino);
 		this.distancia=d;
 		this.cabotaje=c;
 		this.aerolineas=new HashMap<String, Integer>();
-	}
+		this.reservas = new LinkedList<Reserva>();
+		}
 	
 	public void setAerolineas(HashMap<String,Integer> a) {
 		this.aerolineas=a;
+	}
+	
+	public void addReserva(Reserva r) {
+		this.reservas.add(r);
+	}
+	
+	public Reserva getReserva(String aerolinea) {
+		ListIterator<Reserva> itr =this.reservas.listIterator();
+		while (itr.hasNext()) {
+			Reserva re = itr.next();
+			if(re.getAerolinea().equals(aerolinea))
+				return re;
+		}
+		return null;
 	}
 	
 	public HashMap<String,Integer> getAerolineas() {
@@ -30,7 +48,7 @@ public class Ruta {
 		this.aerolineas.put(n, i);
 	}
 
-	public void setOrigen(String p) {
+	public void setOrigen(Aeropuerto p) {
 		this.origen=p;
 	}
 	
@@ -46,7 +64,7 @@ public class Ruta {
 		return this.cabotaje;
 	}
 	
-	public String getOrigen() {
+	public Aeropuerto getOrigen() {
 		return this.origen;
 	}
 	
@@ -63,7 +81,7 @@ public class Ruta {
 	}
 
 	public String toString() {
-		return "1)Origen: " + origen + " 2)Destino: "+destino.getNombre()+  " 3)Distancia: " + distancia + " 4)Cabotaje: " + cabotaje+
+		return "1)Origen: " + origen.getNombre() + " 2)Destino: "+destino.getNombre()+  " 3)Distancia: " + distancia + " 4)Cabotaje: " + cabotaje+
 				" 5)Aerolineas: "+aerolineas;
 	}
 }
