@@ -74,12 +74,22 @@ public class Grafo {
 		return null;
 	}
 	
+	public Ruta getRuta(String origen, String destino ) {
+		ListIterator<Ruta> itr = this.rutas.listIterator();
+		while(itr.hasNext()) {
+			Ruta a =itr.next();
+			if(a.getOrigen().getNombre().equals(origen)&&a.getDestino().getNombre().equals(destino))
+				return a;		
+		}
+		return null;
+	}
+	
 	public Ruta getRuta(String origen, String destino, String aerolinea) {
 		ListIterator<Ruta> itr = this.rutas.listIterator();
 		while(itr.hasNext()) {
 			Ruta a =itr.next();
 			if(a.getOrigen().getNombre().equals(origen)&&a.getDestino().getNombre().equals(destino)
-					&&a.getAerolineas().containsKey(aerolinea))
+					&& a.getAerolineas().containsKey(aerolinea))
 				return a;		
 		}
 		return null;
@@ -96,27 +106,30 @@ public class Grafo {
 		return null;
 	}
 	
-	public void DFS_recorrer() {
-		for (Aeropuerto p : this.aeropuertos) {
+	public LinkedList<Ruta> DFS_recorrer(Aeropuerto origen, Aeropuerto destino) {
+		for (Aeropuerto p : this.aeropuertos) 
 			p.setEstado(NO_VISITADO);
+		LinkedList<Ruta> rutas = new LinkedList<Ruta>();
+		return (DFS_visitar(origen, destino,rutas));
 		} 
-		for (Aeropuerto p : this.aeropuertos) {
-			if(p.getEstado()==NO_VISITADO) 
-				DFS_visitar(p);
-		} 
-	}
 	
-	private void DFS_visitar(Aeropuerto p) {
-		p.setEstado(VISITADO);
-		LinkedList<Aeropuerto> ady = p.getAdyacentes();
-		for (Aeropuerto tmp : ady) {
-			if(tmp.getEstado()==NO_VISITADO) 
-				DFS_visitar(tmp);
-			//si quiero saber si hay ciclos
-			//else if (tmp.getEstado()==VISITADO)
-			//		return true;
+	private LinkedList<Ruta> DFS_visitar( Aeropuerto origen, Aeropuerto destino, LinkedList<Ruta> rutas) {
+		origen.setEstado(VISITADO);
+		LinkedList<Aeropuerto> ady = origen.getAdyacentes();
+		Ruta ruta_actual = this.getRuta(origen.getNombre(), destino.getNombre());
+		if (ady.contains(destino)&&!rutas.contains(ruta_actual)) {
+			rutas.add(ruta_actual);
 		}
-		p.setEstado(TERMINADO);
+		for (Aeropuerto tmp : ady) {
+			if(tmp.getEstado()==NO_VISITADO) { 
+				DFS_visitar(tmp,destino,rutas);
+				Ruta ruta = this.getRuta(origen.getNombre(),tmp.getNombre());
+				if (ruta!=null&&!rutas.contains(ruta)&&!origen.equals(destino))
+					rutas.add(ruta);
+			}
+		}
+		origen.setEstado(NO_VISITADO);
+		return rutas;
 	}
 	
 }

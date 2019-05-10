@@ -40,6 +40,24 @@ public class Ruta {
 		return null;
 	}
 	
+	public boolean hayPasajes(String aerolinea) {
+		if (this.getPasajes(aerolinea)!=0)
+			return true;
+		else return false;
+	}
+	
+	public int getPasajes(String aerolinea) {
+		int pasajes =0;
+		pasajes=this.aerolineas.get(aerolinea);
+		for (Reserva v : this.reservas){
+			if (v.getAerolinea().equals(aerolinea)&&(v.getOrigen().equals(origen.getNombre()))
+					&&(v.getDestino().equals(destino.getNombre()))) {
+				pasajes=pasajes-v.getReservas();
+			}
+		}
+		return pasajes;
+	}
+	
 	public HashMap<String,Integer> getAerolineas() {
 		return new HashMap<String,Integer>(this.aerolineas);
 	}
@@ -84,4 +102,8 @@ public class Ruta {
 		return "1)Origen: " + origen.getNombre() + " 2)Destino: "+destino.getNombre()+  " 3)Distancia: " + distancia + " 4)Cabotaje: " + cabotaje+
 				" 5)Aerolineas: "+aerolineas;
 	}
+	
+//	public String toString() {
+//		return origen.getNombre()+" -- "+destino.getNombre()+";" ;
+//	}
 }
