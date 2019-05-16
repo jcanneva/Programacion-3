@@ -1,91 +1,102 @@
 package tpe;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 public class Ruta {
 
-	LinkedList<Reserva> reservas;
-	Aeropuerto origen; 
-	Aeropuerto destino; 
-	double distancia;
-	boolean cabotaje;
-	HashMap<String,Integer> aerolineas;
-	
-	public Ruta (Aeropuerto origen, Aeropuerto destino, double d, boolean c) {
+	private LinkedList<Reserva> reservas;
+	private Aeropuerto origen;
+	private Aeropuerto destino;
+	private double distancia;
+	private boolean cabotaje;
+	private HashMap<String, Integer> aerolineas;
+
+	public Ruta(Aeropuerto origen, Aeropuerto destino, double d, boolean c) {
 		this.setOrigen(origen);
 		this.setDestino(destino);
-		this.distancia=d;
-		this.cabotaje=c;
-		this.aerolineas=new HashMap<String, Integer>();
+		this.distancia = d;
+		this.cabotaje = c;
+		this.aerolineas = new HashMap<String, Integer>();
 		this.reservas = new LinkedList<Reserva>();
-		}
-	
-	public void setAerolineas(HashMap<String,Integer> a) {
-		this.aerolineas=a;
 	}
 	
+	public LinkedList<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(LinkedList<Reserva> reservas) {
+		this.reservas = new LinkedList<Reserva>(reservas);
+	}
+
+	public void setAerolineas(HashMap<String, Integer> a) {
+		this.aerolineas = new HashMap<String,Integer>(a);
+	}
+
 	public void addReserva(Reserva r) {
 		this.reservas.add(r);
 	}
-	
-	public Reserva getReserva(String aerolinea) {
-		ListIterator<Reserva> itr =this.reservas.listIterator();
-		while (itr.hasNext()) {
-			Reserva re = itr.next();
-			if(re.getAerolinea().equals(aerolinea))
-				return re;
-		}
-		return null;
-	}
-	
-	public boolean hayPasajes(String aerolinea) {
-		if (this.getPasajes(aerolinea)!=0)
-			return true;
-		else return false;
-	}
-	
-	public int getPasajes(String aerolinea) {
-		int pasajes =0;
-		pasajes=this.aerolineas.get(aerolinea);
-		for (Reserva v : this.reservas){
-			if (v.getAerolinea().equals(aerolinea)&&(v.getOrigen().equals(origen.getNombre()))
-					&&(v.getDestino().equals(destino.getNombre()))) {
-				pasajes=pasajes-v.getReservas();
+
+	public void actualizar() {
+		for (Reserva r : this.reservas) {
+			Iterator<String> itr = aerolineas.keySet().iterator();
+			while (itr.hasNext()) {
+				String aerolinea = itr.next();
+				if (r.getAerolinea().equals(aerolinea))
+					aerolineas.put(aerolinea, aerolineas.get(aerolinea) - r.getReservas());
 			}
 		}
-		return pasajes;
+	}
+
+	public boolean hayVueloSinAerolinea(String a) {
+		Iterator<String> itr = aerolineas.keySet().iterator();
+		while (itr.hasNext()) {
+			String aerolinea = itr.next();
+			if (aerolineas.get(aerolinea) > 0 && !aerolinea.equals(a))
+				return true;
+		}
+		return false;
 	}
 	
-	public HashMap<String,Integer> getAerolineas() {
-		return new HashMap<String,Integer>(this.aerolineas);
+	public boolean hayVuelo() {
+		Iterator<String> itr = aerolineas.keySet().iterator();
+		while (itr.hasNext()) {
+			String aerolinea = itr.next();
+			if (aerolineas.get(aerolinea) > 0 )
+				return true;
+		}
+		return false;
 	}
-	
+
+	public HashMap<String, Integer> getAerolineas() {
+		return new HashMap<String, Integer>(this.aerolineas);
+	}
+
 	public void addAerolinea(String n, Integer i) {
 		this.aerolineas.put(n, i);
 	}
 
 	public void setOrigen(Aeropuerto p) {
-		this.origen=p;
+		this.origen = p;
 	}
-	
+
 	public void setCabotaje(boolean c) {
-		this.cabotaje=c;
+		this.cabotaje = c;
 	}
-	
+
 	public void setDestino(Aeropuerto p) {
-		this.destino=p;
+		this.destino = p;
 	}
-	
+
 	public boolean getCabotaje() {
 		return this.cabotaje;
 	}
-	
+
 	public Aeropuerto getOrigen() {
 		return this.origen;
 	}
-	
+
 	public Aeropuerto getDestino() {
 		return this.destino;
 	}
@@ -99,11 +110,7 @@ public class Ruta {
 	}
 
 	public String toString() {
-		return "1)Origen: " + origen.getNombre() + " 2)Destino: "+destino.getNombre()+  " 3)Distancia: " + distancia + " 4)Cabotaje: " + cabotaje+
-				" 5)Aerolineas: "+aerolineas;
+		return origen.getNombre()+" -- "+destino.getNombre() ;
 	}
 	
-//	public String toString() {
-//		return origen.getNombre()+" -- "+destino.getNombre()+";" ;
-//	}
 }

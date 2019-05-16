@@ -5,14 +5,16 @@ import java.util.LinkedList;
 
 public class Aeropuerto {
 
-	LinkedList<Ruta> rutas;
-	String estado;
-	String nombre;
-	String pais;
-	String ciudad;
+	private LinkedList<Ruta> rutas;
+	private String estado;
+	private String nombre;
+	private String pais;
+	private String ciudad;
+	private static final String NO_VISITADO="blanco";
+	private static final String SALIDA="1)Nombre: ";
 	
 	public Aeropuerto(String nombre, String pais, String ciudad) {
-		this.setEstado("blanco");
+		this.estado = NO_VISITADO;
 		this.rutas=new LinkedList<Ruta>();
 		this.nombre=nombre;
 		this.pais=pais;
@@ -38,7 +40,23 @@ public class Aeropuerto {
 	public void addRuta(Ruta r) {
 		this.rutas.add(r);
 	}
-	
+
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
 	public LinkedList<Aeropuerto> getAdyacentes(){
 		LinkedList<Aeropuerto> adyacentes = new LinkedList<Aeropuerto>();
 		Iterator<Ruta> itr = this.rutas.iterator();
@@ -47,7 +65,7 @@ public class Aeropuerto {
 		return adyacentes;
 	}
 	
-	public String toString() {
-		return "1)Nombre: " + nombre + " 2)Pais: " + pais + " 3)Ciudad: " + ciudad;
+	public String imprimir() {
+		return SALIDA + nombre ;
 	}
 }
