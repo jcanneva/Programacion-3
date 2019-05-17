@@ -122,7 +122,7 @@ public class Grafo {
 		return salida;
 	}
 
-	public LinkedList<LinkedList<Ruta>> DFS(Aeropuerto origen, Aeropuerto destino, String aerolinea) {
+	private LinkedList<LinkedList<Ruta>> DFS(Aeropuerto origen, Aeropuerto destino, String aerolinea) {
 		for (Aeropuerto p : this.aeropuertos)
 			p.setEstado(NO_VISITADO);
 		LinkedList<Aeropuerto> ady = origen.getAdyacentes();
@@ -160,9 +160,9 @@ public class Grafo {
 					Ruta ruta_tmp = this.getRuta(actual.getNombre(), tmp.getNombre());
 					if (ruta_tmp!=null&&ruta_tmp.hayVueloSinAerolinea(aerolinea)) {
 						rutas.add(ruta_tmp);
-						if (tmp.getEstado().equals(NO_VISITADO)) {
+						if (tmp.getEstado().equals(NO_VISITADO)) 
 							DFS_explorar(actual, origen, tmp, destino, rutas, aerolinea);
-						} else if (!rutas.isEmpty())
+						else if (!rutas.isEmpty())
 							rutas.remove(ruta_tmp);
 					}
 				}

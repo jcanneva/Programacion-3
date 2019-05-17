@@ -18,6 +18,8 @@ public class Main {
 
 	public static void menu(Grafo grafo, CSVWritter writter) {
 		boolean seguir = true;
+		Timer t = new Timer();
+		double timer;
 		while (seguir) {
 			listarOpciones();
 			String op = getString();
@@ -57,7 +59,10 @@ public class Main {
 				String destino = getString();
 				System.out.println("Ingrese aerolínea deseada");
 				String aerolinea = getString();
+				t.start();
 				Ruta r = grafo.getRuta(origen, destino, aerolinea);
+				timer = t.stop();
+				System.out.println("Tiempo de ejecucion "+timer);
 				if (r != null) {
 					int pasaj = r.getAerolineas().get(aerolinea);
 					double dist = r.getDistancia();
@@ -79,7 +84,10 @@ public class Main {
 				String destino2 = getString();
 				System.out.println("Ingrese aerolínea no deseada");
 				String aerolinea2 = getString();
+				t.start();
 				LinkedList<LinkedList<Ruta>> servicio2 = grafo.servicio2(origen2, destino2, aerolinea2);
+				timer = t.stop();
+				System.out.println("Tiempo de ejecucion "+timer);
 				ListIterator<LinkedList<Ruta>> itr1 = servicio2.listIterator();
 				System.out.println("Rutas:  De " + origen2 + " a " + destino2);
 				System.out.println();
@@ -119,7 +127,10 @@ public class Main {
 				String pais1 = getString();
 				System.out.println("Ingrese pais: ");
 				String pais2 = getString();
+				t.start();
 				LinkedList<Ruta> salida = grafo.servicio3(pais1, pais2);
+				timer = t.stop();
+				System.out.println("Tiempo de ejecucion "+timer);
 				if (!salida.isEmpty()) {
 					ListIterator<Ruta> it = salida.listIterator();
 					while (it.hasNext()) {
