@@ -1,37 +1,21 @@
-De La Araucania a Logan
- Sin arolinea:United Airlines
+De Madrid-Barajas a Comodoro Benitez
+ Sin arolinea:
 1) 
-La Araucania -- Comodoro Benitez
-Comodoro Benitez -- Ministro Pistarini
-Ministro Pistarini -- John F. Kennedy
-John F. Kennedy -- Logan
-Escalas: 3 Distancia:306.45
+Madrid-Barajas -- Ministro Pistarini
+Ministro Pistarini -- El prat
+El prat -- Comodoro Benitez
+Escalas: 2 Distancia:1127.7
 2) 
-La Araucania -- Comodoro Benitez
-Comodoro Benitez -- Ministro Pistarini
-Ministro Pistarini -- Armando Tola
-Armando Tola -- Silvio Pettirosi
-Silvio Pettirosi -- Francisco Gabrielli
-Francisco Gabrielli -- Jorge Newbery
-Jorge Newbery -- John F. Kennedy
-John F. Kennedy -- Logan
-Escalas: 7 Distancia:306.45
+Madrid-Barajas -- Ministro Pistarini
+Ministro Pistarini -- Comodoro Benitez
+Escalas: 1 Distancia:1127.7
 3) 
-La Araucania -- Comodoro Benitez
-Comodoro Benitez -- Comandante Espora
-Comandante Espora -- Francisco Gabrielli
-Francisco Gabrielli -- Jorge Newbery
-Jorge Newbery -- John F. Kennedy
-John F. Kennedy -- Logan
-Escalas: 5 Distancia:306.45
+Madrid-Barajas -- El prat
+El prat -- Ministro Pistarini
+Ministro Pistarini -- Comodoro Benitez
+Escalas: 2 Distancia:1127.7
 4) 
-La Araucania -- Comodoro Benitez
-Comodoro Benitez -- Comandante Espora
-Comandante Espora -- Francisco Gabrielli
-Francisco Gabrielli -- Silvio Pettirosi
-Silvio Pettirosi -- Armando Tola
-Armando Tola -- Ministro Pistarini
-Ministro Pistarini -- John F. Kennedy
-John F. Kennedy -- Logan
-Escalas: 7 Distancia:306.45
+Madrid-Barajas -- El prat
+El prat -- Comodoro Benitez
+Escalas: 1 Distancia:1127.7
 

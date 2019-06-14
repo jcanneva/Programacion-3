@@ -8,9 +8,9 @@ import tpe.Grafo;
 public class CSVReader {
 
 	public void cargarDatos(Grafo grafo) {
-		String csvAeropuerto = "C:/Users/jcann/TPE/src/tpe/Dataset/Aeropuertos.csv";
-		String csvRutas = "C:/Users/jcann/TPE/src/tpe/Dataset/Rutas.csv";
-		String csvReservas = "C:/Users/jcann/TPE/src/tpe/Dataset/Reservas.csv";
+		String csvAeropuerto = "C:/Users/jcann/TPE/src/tpe/Dataset/Menor/Aeropuertos.csv";
+		String csvRutas = "C:/Users/jcann/TPE/src/tpe/Dataset/Menor/Rutas.csv";
+		String csvReservas = "C:/Users/jcann/TPE/src/tpe/Dataset/Menor/Reservas.csv";
 		String line = "";
 		String cvsSplitBy = ";";
 

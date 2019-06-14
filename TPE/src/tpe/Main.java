@@ -62,7 +62,7 @@ public class Main {
 				t.start();
 				Ruta r = grafo.getRuta(origen, destino, aerolinea);
 				timer = t.stop();
-				System.out.println("Tiempo de ejecucion "+timer);
+				System.out.println("Tiempo de ejecucion " + timer);
 				if (r != null) {
 					int pasaj = r.getAerolineas().get(aerolinea);
 					double dist = r.getDistancia();
@@ -87,7 +87,7 @@ public class Main {
 				t.start();
 				LinkedList<LinkedList<Ruta>> servicio2 = grafo.servicio2(origen2, destino2, aerolinea2);
 				timer = t.stop();
-				System.out.println("Tiempo de ejecucion "+timer);
+				System.out.println("Tiempo de ejecucion " + timer);
 				ListIterator<LinkedList<Ruta>> itr1 = servicio2.listIterator();
 				System.out.println("Rutas:  De " + origen2 + " a " + destino2);
 				System.out.println();
@@ -114,7 +114,7 @@ public class Main {
 						System.out.println("1)Escalas: " + escalas + "   2)Distancia: " + km);
 						System.out.println();
 					}
-					writter.guardarSalidaD(servicio2,origen2, destino2, aerolinea2);
+					writter.guardarSalidaD(servicio2, origen2, destino2, aerolinea2);
 					grafo.clearServicio2();
 				} else
 					System.out.println("No existen vuelos");
@@ -130,7 +130,7 @@ public class Main {
 				t.start();
 				LinkedList<Ruta> salida = grafo.servicio3(pais1, pais2);
 				timer = t.stop();
-				System.out.println("Tiempo de ejecucion "+timer);
+				System.out.println("Tiempo de ejecucion " + timer);
 				if (!salida.isEmpty()) {
 					ListIterator<Ruta> it = salida.listIterator();
 					while (it.hasNext()) {
@@ -141,6 +141,27 @@ public class Main {
 					System.out.println("No existe");
 				System.out.println();
 				break;
+			case "f":
+				System.out.println("Ingrese aeropuerto origen: ");
+				String o = getString();
+				LinkedList<Ruta> tmp = grafo.Backtracking(o);
+				ListIterator<Ruta> itr3 = tmp.listIterator();
+				double km=0;
+				while (itr3.hasNext()) {
+					Ruta aux =itr3.next();
+					if (km==0) {
+					System.out.print(aux.toString()+" -- ");
+					km+=aux.getDistancia();
+					}else {
+						System.out.print(aux.getDestino().getNombre()+" -- ");
+						km+=aux.getDistancia();
+					}
+				}
+				System.out.println();
+				System.out.println(km);
+				System.out.println();
+				break;
+
 			default:
 				seguir = false;
 				;
@@ -163,6 +184,7 @@ public class Main {
 		System.out.println("c. Verificar vuelo directo");
 		System.out.println("d. Obtener vuelos sin aerolinea");
 		System.out.println("e. Vuelos disponibles");
+		System.out.println("f. Backtracking");
 		System.out.println(" . Exit");
 	}
 

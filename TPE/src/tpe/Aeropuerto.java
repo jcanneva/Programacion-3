@@ -20,6 +20,10 @@ public class Aeropuerto {
 		this.pais=pais;
 		this.ciudad=ciudad;
 	}
+	
+	public LinkedList<Ruta> getRutas(){
+		return new LinkedList<Ruta>(this.rutas);
+	}
 
 	public void setEstado(String e) {
 		this.estado=e;
