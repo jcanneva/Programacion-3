@@ -144,9 +144,24 @@ public class Main {
 			case "f":
 				System.out.println("Ingrese aeropuerto origen: ");
 				String o = getString();
-				LinkedList<Ruta> tmp = grafo.Backtracking(o);
+				LinkedList<Ruta> tmp = grafo.backtracking(o);
+				ListIterator<LinkedList<Ruta>> it = grafo.getBackBruto().listIterator();
+				while (it.hasNext()) {
+					LinkedList<Ruta> c = it.next();
+					ListIterator<Ruta> itr3 = c.listIterator();
+					double km = 0;
+					while (itr3.hasNext()) {
+						Ruta aux = itr3.next();
+						System.out.print(aux + " - ");
+						km += aux.getDistancia();
+					}
+					System.out.println();
+					System.out.println(km);
+					System.out.println();
+				}
 				ListIterator<Ruta> itr3 = tmp.listIterator();
 				double km=0;
+				System.out.println("Mejor solucion: ");
 				while (itr3.hasNext()) {
 					Ruta aux =itr3.next();
 					if (km==0) {
@@ -161,7 +176,21 @@ public class Main {
 				System.out.println(km);
 				System.out.println();
 				break;
-
+			case "g":
+				System.out.println("Ingrese aeropuerto origen: ");
+				String aer = getString();
+				LinkedList<Ruta> greedy = grafo.greedy(aer);
+				ListIterator<Ruta> it4 = greedy.listIterator();
+				double dist = 0;
+				while (it4.hasNext()) {
+					Ruta rtmp = it4.next();
+					 dist+=rtmp.getDistancia();
+					System.out.print(rtmp.getOrigen().getNombre()+" -- ");
+				}
+				System.out.println();
+				System.out.println("Distancia: "+" "+dist);
+				System.out.println();
+				break;
 			default:
 				seguir = false;
 				;
@@ -185,6 +214,7 @@ public class Main {
 		System.out.println("d. Obtener vuelos sin aerolinea");
 		System.out.println("e. Vuelos disponibles");
 		System.out.println("f. Backtracking");
+		System.out.println("g. Greedy");
 		System.out.println(" . Exit");
 	}
 

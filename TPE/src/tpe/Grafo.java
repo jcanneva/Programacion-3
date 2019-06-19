@@ -9,7 +9,9 @@ public class Grafo {
 	private LinkedList<Ruta> rutas;
 	private LinkedList<Reserva> reservas;
 	private LinkedList<LinkedList<Ruta>> servicio2;
-	private LinkedList<Ruta> solucionBack;
+	private LinkedList<Ruta> solucionBackPoda;
+	private LinkedList<LinkedList<Ruta>> backBruto;
+	private LinkedList<Ruta> solucionGreedy;
 
 	final static String VISITADO = "amarillo";
 	final static String NO_VISITADO = "blanco";
@@ -20,11 +22,21 @@ public class Grafo {
 		this.rutas = new LinkedList<Ruta>();
 		this.reservas = new LinkedList<Reserva>();
 		this.servicio2 = new LinkedList<LinkedList<Ruta>>();
-		this.solucionBack = new LinkedList<Ruta>();
+		this.solucionBackPoda = new LinkedList<Ruta>();
+		this.backBruto = new LinkedList<LinkedList<Ruta>>();
+		this.solucionGreedy = new LinkedList<Ruta>();
+	}
+
+	public LinkedList<Ruta> getSolucionGreedy() {
+		return new LinkedList<Ruta>(this.solucionGreedy);
 	}
 
 	public LinkedList<Aeropuerto> getAeropuertos() {
 		return new LinkedList<Aeropuerto>(this.aeropuertos);
+	}
+
+	public LinkedList<LinkedList<Ruta>> getBackBruto() {
+		return new LinkedList<LinkedList<Ruta>>(this.backBruto);
 	}
 
 	public void clearServicio2() {
@@ -151,21 +163,21 @@ public class Grafo {
 		}
 	}
 
-	public LinkedList<Ruta> Backtracking(String o) {
+	public LinkedList<Ruta> backtracking(String o) {
 		Aeropuerto origen = this.getAeropuerto(o);
 		LinkedList<Aeropuerto> u = new LinkedList<Aeropuerto>(this.aeropuertos);
 		origen.setEstado(VISITADO);
 		u.remove(origen);
 		LinkedList<Ruta> s = new LinkedList<Ruta>();
-		Back(u, origen, s, o);
-		return this.solucionBack;
+		backConPoda(u, origen, s, o);
+		return this.solucionBackPoda;
 	}
 
 	private boolean esMenor(LinkedList<Ruta> s) {
-		if (!this.solucionBack.isEmpty()) {
+		if (!this.solucionBackPoda.isEmpty()) {
 			double tmp = 0;
 			double aux = 0;
-			ListIterator<Ruta> itr = this.solucionBack.listIterator();
+			ListIterator<Ruta> itr = this.solucionBackPoda.listIterator();
 			ListIterator<Ruta> itr2 = s.listIterator();
 			while (itr.hasNext())
 				tmp += itr.next().getDistancia();
@@ -179,15 +191,15 @@ public class Grafo {
 			return true;
 	}
 
-	private void Back(LinkedList<Aeropuerto> u, Aeropuerto origen, LinkedList<Ruta> s, String o) {
+	private void backConPoda(LinkedList<Aeropuerto> u, Aeropuerto origen, LinkedList<Ruta> s, String o) {
 		if (u.isEmpty()) {
-			Aeropuerto destino=this.getAeropuerto(o);
+			Aeropuerto destino = this.getAeropuerto(o);
 			if (origen.getAdyacentes().contains(destino)) {
 				Ruta r = this.getRuta(origen.getNombre(), destino.getNombre());
 				s.add(r);
 				if (esMenor(s)) {
 					LinkedList<Ruta> aux = new LinkedList<Ruta>(s);
-					this.solucionBack = aux;
+					this.solucionBackPoda = aux;
 				}
 				s.remove(r);
 			}
@@ -199,7 +211,7 @@ public class Grafo {
 					u.remove(origen);
 					s.add(r);
 					if (esMenor(s))
-						Back(u, origen, s, o);
+						backConPoda(u, origen, s, o);
 					s.remove(r);
 					origen.setEstado(NO_VISITADO);
 					u.add(origen);
@@ -208,8 +220,42 @@ public class Grafo {
 		}
 	}
 
-	public void Greedy(String origen) {
+	public LinkedList<Ruta> greedy(String o) {
+		Aeropuerto origen = this.getAeropuerto(o);
+		LinkedList<Aeropuerto> aeropuertos = new LinkedList<Aeropuerto>(this.aeropuertos);
+		LinkedList<Ruta> solucion = new LinkedList<Ruta>();
+		if (origen != null) {
+			for (Aeropuerto a : aeropuertos)
+				a.setEstado(NO_VISITADO);
+			while (!aeropuertos.isEmpty()) {
+				origen.setEstado(VISITADO);
+				Aeropuerto tmp = getAeropuertoCercano(origen);
+				if (tmp != null) {
+					Ruta r = this.getRuta(origen.getNombre(), tmp.getNombre());
+					solucion.add(r);
+				}
+				aeropuertos.remove(origen);
+				origen = tmp;
+			}
+			origen = this.getAeropuerto(o);
+			if (origen.getAdyacentes().contains(solucion.getLast().getDestino())) {
+				Ruta rtmp = this.getRuta(solucion.getLast().getDestino().getNombre(), origen.getNombre());
+				solucion.add(rtmp);
+			}
+		}
+		return solucion;
+	}
 
+	private Aeropuerto getAeropuertoCercano(Aeropuerto origen) {
+		double dist = Double.MAX_VALUE;
+		Aeropuerto tmp = null;
+		for (Ruta r : origen.getRutas()) {
+			if (r.getDistancia() < dist && r.getDestino().getEstado().equals(NO_VISITADO)) {
+				dist = r.getDistancia();
+				tmp = r.getDestino();
+			}
+		}
+		return tmp;
 	}
 
 }
