@@ -1,0 +1,33 @@
+John F. Kennedy;Ministro Pistarini;8535.74;0;{United Airlines-96,Delta-152,LATAM-210,Aerolineas-276,Avianca-250}
+John F. Kennedy;Jorge Newbery;8516;0;{United Airlines-96,Delta-152,LATAM-210,Aerolineas-276}
+Ministro Pistarini;Armando Tola;2054.86;1;{Aerolineas-120}
+Ministro Pistarini;El prat;10492.25;0;{Aerolineas-120,LATAM-200}
+Ministro Pistarini;Pucon;1291.71;0;{United Airlines-120}
+Ministro Pistarini;Comodoro Benitez;1127.70;0;{United Airlines-120,Delta-80}
+Comodoro Benitez;El prat;1127.70;0;{United Airlines-120,Delta-80}
+Armando Tola;El prat;12495.88;0;{United Airlines-146}
+Armando Tola;John F. Kennedy;10137.15;0;{United Airlines-146}
+Armando Tola;Logan;10319.77;0;{United Airlines-146}
+Logan;John F. Kennedy;306.45;1;{United Airlines-90,LATAM-120}
+Francisco Gabrielli;Jorge Newbery;975.99;1;{Aerolineas-100}
+Comandante Espora;Francisco Gabrielli;544.36;1;{Aerolineas-80}
+Jorge Chavez;Pucon;3071.73;0;{LATAM-100}
+Jorge Chavez;Logan;6087.33;0;{United Airlines-100}
+Humberto Delgado;Logan;5136.71;0;{United Airlines-90,Delta-120}
+Humberto Delgado;Kingsford Smith;18197;0;{United Airlines-200}
+Kingsford Smith;Armando Tola;9735.24;0;{LATAM-186,Delta-96}
+Tocumen;John F. Kennedy;3640.38;0;{United Airlines-120,LATAM-140}
+Tocumen;Madrid-Barajas;8310.62;0;{United Airlines-96}
+Westchester;Logan;265.76;1;{United Airlines-126}
+Tancredo Neves;Logan;7471.88;0;{United Airlines-186}
+Silvio Pettirosi;Armando Tola;3062.89;0;{Aerolineas-154}
+Madrid-Barajas;Ministro Pistarini;10086.03;0;{Delta-120,LATAM-120}
+Campinas;Tancredo Neves;481.30;1;{LATAM-120,Avianca-100}
+Campinas;Logan;7754.89;0;{United Airlines-146}
+John F. Kennedy;Madrid-Barajas;5774;0;{United Airlines-126}
+Pucon;Humberto Delgado;10787.62;0;{LATAM-120,Delta-80}
+El prat;Madrid-Barajas;506;1;{Delta-120,Avianca-124}
+Comodoro Benitez;Comandante Espora;956.12;0;{Aerolineas-148}
+La Araucania;Comodoro Benitez;630;1;{Avianca-160}
+Pucon;Armando Tola;1232.04;0;{United Airlines-100}
+Francisco Gabrielli;Silvio Pettirosi;1385.09;0;{Aerolineas-124}
