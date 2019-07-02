@@ -1,0 +1,33 @@
+John F. Kennedy;Ministro Pistarini;8535.74;0;{United Airlines-96,Delta-152,LATAM-210,Aerolineas-276,Avianca-250}
+John F. Kennedy;Jorge Newbery;8516;0;{United Airlines-96,Delta-152,LATAM-210,Aerolineas-276}
+Ministro Pistarini;Armando Tola;2054.86;1;{Aerolineas-120}
+Ministro Pistarini;El prat;10492.25;0;{Aerolineas-120,LATAM-200}
+Ministro Pistarini;Pucon;1291.71;0;{United Airlines-120}
+Ministro Pistarini;Comodoro Benitez;1127.70;0;{United Airlines-120,Delta-80}
+Comodoro Benitez;El prat;1127.70;0;{United Airlines-120,Delta-80}
+Armando Tola;El prat;12495.88;0;{United Airlines-146}
+Armando Tola;John F. Kennedy;10137.15;0;{United Airlines-146}
+Francisco Gabrielli;Jorge Newbery;975.99;1;{Aerolineas-100}
+Comandante Espora;Francisco Gabrielli;544.36;1;{Aerolineas-80}
+Humberto Delgado;Kingsford Smith;18197;0;{United Airlines-200}
+Kingsford Smith;Armando Tola;9735.24;0;{LATAM-186,Delta-96}
+Tocumen;John F. Kennedy;3640.38;0;{United Airlines-120,LATAM-140}
+Tocumen;Madrid-Barajas;8310.62;0;{United Airlines-96}
+Silvio Pettirosi;Armando Tola;3062.89;0;{Aerolineas-154}
+Madrid-Barajas;Ministro Pistarini;10086.03;0;{Delta-120,LATAM-120}
+John F. Kennedy;Madrid-Barajas;5774;0;{United Airlines-126}
+Pucon;Humberto Delgado;10787.62;0;{LATAM-120,Delta-80}
+El prat;Madrid-Barajas;506;1;{Delta-120,Avianca-124}
+Comodoro Benitez;Comandante Espora;956.12;0;{Aerolineas-148}
+La Araucania;Comodoro Benitez;630;1;{Avianca-160}
+La Araucania;Jorge Newbery;1430;1;{LATAM-100}
+La Araucania;Ministro Pistarini;1670;1;{LATAM-45-Avianca-80}
+Pucon;Armando Tola;1232.04;0;{United Airlines-100}
+Francisco Gabrielli;Silvio Pettirosi;1385.09;0;{Aerolineas-124}
+Francisco Gabrielli;Tocumen;1785.09;0;{Aerolineas-64}
+Comandante Espora;Madrid-Barajas;715.22;1;{Delta-120}
+Madrid-Barajas;Comodoro Benitez;886.05;0;{LATAM-140,Delta-90}
+El prat;Kingsford Smith;1506;1;{LATAM-100,Avianca-160}
+Madrid-Barajas;Kingsford Smith;1886.05;0;{LATAM-200,Delta-50}
+Tocumen;Pucon;810.62;0;{United Airlines-66}
+Tocumen;Silvio Pettirosi;620.32;0;{Avianca-66}

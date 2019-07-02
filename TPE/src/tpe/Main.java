@@ -5,18 +5,27 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import entidad.Grafo;
+import entidad.Aeropuerto;
+import entidad.Ruta;
+import entidad.Reserva;
+import entidad.Timer;
+import data.CSVReader;
+import data.CSVWritter;
+
 public class Main {
 
 	public static void main(String[] args) {
 		Grafo grafo = new Grafo();
+		Sistema sistema = new Sistema(grafo);
 		CSVReader reader = new CSVReader();
-		reader.cargarDatos(grafo);
-		actualizarRutasConReservas(grafo);
 		CSVWritter writter = new CSVWritter();
-		menu(grafo, writter);
+		reader.cargarDatos(sistema, grafo);
+		actualizarRutasConReservas(grafo);
+		menu(sistema, grafo, writter);
 	}
 
-	public static void menu(Grafo grafo, CSVWritter writter) {
+	public static void menu(Sistema sistema, Grafo grafo, CSVWritter writter) {
 		boolean seguir = true;
 		Timer t = new Timer();
 		double timer;
@@ -39,7 +48,7 @@ public class Main {
 				break;
 			case "b":
 				// 2
-				LinkedList<Reserva> reservas = new LinkedList<Reserva>(grafo.getReservas());
+				LinkedList<Reserva> reservas = new LinkedList<Reserva>(sistema.getReservas());
 				ListIterator<Reserva> itr2 = reservas.listIterator();
 				System.out.println();
 				System.out.println("Reservas:");
@@ -85,7 +94,7 @@ public class Main {
 				System.out.println("Ingrese aerolínea no deseada");
 				String aerolinea2 = getString();
 				t.start();
-				LinkedList<LinkedList<Ruta>> servicio2 = grafo.servicio2(origen2, destino2, aerolinea2);
+				LinkedList<LinkedList<Ruta>> servicio2 = sistema.servicio2(origen2, destino2, aerolinea2);
 				timer = t.stop();
 				System.out.println("Tiempo de ejecucion " + timer);
 				ListIterator<LinkedList<Ruta>> itr1 = servicio2.listIterator();
@@ -115,7 +124,7 @@ public class Main {
 						System.out.println();
 					}
 					writter.guardarSalidaD(servicio2, origen2, destino2, aerolinea2);
-					grafo.clearServicio2();
+					sistema.clearServicio2();
 				} else
 					System.out.println("No existen vuelos");
 				System.out.println();
@@ -128,7 +137,7 @@ public class Main {
 				System.out.println("Ingrese pais: ");
 				String pais2 = getString();
 				t.start();
-				LinkedList<Ruta> salida = grafo.servicio3(pais1, pais2);
+				LinkedList<Ruta> salida = sistema.servicio3(pais1, pais2);
 				timer = t.stop();
 				System.out.println("Tiempo de ejecucion " + timer);
 				if (!salida.isEmpty()) {
@@ -144,52 +153,51 @@ public class Main {
 			case "f":
 				System.out.println("Ingrese aeropuerto origen: ");
 				String o = getString();
-				LinkedList<Ruta> tmp = grafo.backtracking(o);
-				ListIterator<LinkedList<Ruta>> it = grafo.getBackBruto().listIterator();
-				while (it.hasNext()) {
-					LinkedList<Ruta> c = it.next();
-					ListIterator<Ruta> itr3 = c.listIterator();
+				t.start();
+				LinkedList<Ruta> tmp = sistema.backtracking(o);
+				timer = t.stop();
+				System.out.println("Tiempo de ejecucion " + timer);
+				if (tmp != null) {
+					ListIterator<Ruta> itr3 = tmp.listIterator();
 					double km = 0;
+					System.out.println("Mejor solucion: ");
 					while (itr3.hasNext()) {
 						Ruta aux = itr3.next();
-						System.out.print(aux + " - ");
-						km += aux.getDistancia();
+						if (km == 0) {
+							System.out.print(aux.toString() + " -- ");
+							km += aux.getDistancia();
+						} else {
+							System.out.print(aux.getDestino().getNombre() + " -- ");
+							km += aux.getDistancia();
+						}
 					}
 					System.out.println();
 					System.out.println(km);
 					System.out.println();
-				}
-				ListIterator<Ruta> itr3 = tmp.listIterator();
-				double km=0;
-				System.out.println("Mejor solucion: ");
-				while (itr3.hasNext()) {
-					Ruta aux =itr3.next();
-					if (km==0) {
-					System.out.print(aux.toString()+" -- ");
-					km+=aux.getDistancia();
-					}else {
-						System.out.print(aux.getDestino().getNombre()+" -- ");
-						km+=aux.getDistancia();
-					}
-				}
-				System.out.println();
-				System.out.println(km);
-				System.out.println();
+					sistema.clearBack();
+				} else
+					System.out.println("No hay solucion");
 				break;
 			case "g":
 				System.out.println("Ingrese aeropuerto origen: ");
 				String aer = getString();
-				LinkedList<Ruta> greedy = grafo.greedy(aer);
-				ListIterator<Ruta> it4 = greedy.listIterator();
-				double dist = 0;
-				while (it4.hasNext()) {
-					Ruta rtmp = it4.next();
-					 dist+=rtmp.getDistancia();
-					System.out.print(rtmp.getOrigen().getNombre()+" -- ");
+				t.start();
+				LinkedList<Ruta> greedy = sistema.greedy(aer);
+				timer = t.stop();
+				System.out.println("Tiempo de ejecucion " + timer);
+				if (greedy != null) {
+					ListIterator<Ruta> it4 = greedy.listIterator();
+					double dist = 0;
+					while (it4.hasNext()) {
+						Ruta rtmp = it4.next();
+						dist += rtmp.getDistancia();
+						System.out.print(rtmp.toString() + " -- ");
+					}
+					System.out.println();
+					System.out.println("Distancia: " + " " + dist);
+					System.out.println();
+					sistema.clearGreedy();
 				}
-				System.out.println();
-				System.out.println("Distancia: "+" "+dist);
-				System.out.println();
 				break;
 			default:
 				seguir = false;
@@ -198,8 +206,8 @@ public class Main {
 		}
 	}
 
-	public static void actualizarRutasConReservas(Grafo g) {
-		LinkedList<Ruta> rutas = g.getRutas();
+	public static void actualizarRutasConReservas(Grafo grafo) {
+		LinkedList<Ruta> rutas = grafo.getRutas();
 		ListIterator<Ruta> iterador = rutas.listIterator();
 		while (iterador.hasNext()) {
 			iterador.next().actualizar();

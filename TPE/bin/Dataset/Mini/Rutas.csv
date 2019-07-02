@@ -1,0 +1,6 @@
+Ministro Pistarini;El prat;10492.0;0;{Aerolineas-120,LATAM-200}
+Ministro Pistarini;Comodoro Benitez;1127.00;0;{United Airlines-120,Delta-80}
+Comodoro Benitez;El prat;5033.00;0;{United Airlines-120,Delta-80}
+Comodoro Benitez;Madrid-Barajas;2750.00;0;{United Airlines-60,Delta-120}
+Madrid-Barajas;Ministro Pistarini;10086.00;0;{Delta-120,LATAM-120}
+El prat;Madrid-Barajas;4666;1;{Delta-120,Avianca-124}
