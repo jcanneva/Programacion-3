@@ -1,5 +1,3 @@
-package tpe;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
@@ -66,7 +64,7 @@ public class Main {
 				String origen = getString();
 				System.out.println("Ingrese aeropuerto destino:");
 				String destino = getString();
-				System.out.println("Ingrese aerolínea deseada");
+				System.out.println("Ingrese aerolÃ­nea deseada");
 				String aerolinea = getString();
 				t.start();
 				Ruta r = grafo.getRuta(origen, destino, aerolinea);
@@ -91,7 +89,7 @@ public class Main {
 				String origen2 = getString();
 				System.out.println("Ingrese aeropuerto destino:");
 				String destino2 = getString();
-				System.out.println("Ingrese aerolínea no deseada");
+				System.out.println("Ingrese aerolÃ­nea no deseada");
 				String aerolinea2 = getString();
 				t.start();
 				LinkedList<LinkedList<Ruta>> servicio2 = sistema.servicio2(origen2, destino2, aerolinea2);
