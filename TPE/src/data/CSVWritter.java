@@ -22,7 +22,7 @@ public class CSVWritter {
 			FileWriter fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
 			ListIterator<Aeropuerto> itr = a.listIterator();
-			while (itr.hasNext()) {
+			while (itr.hasNext()) {  
 				bw.write(itr.next().imprimir());
 				bw.newLine();
 			}
@@ -47,12 +47,10 @@ public class CSVWritter {
 			FileWriter fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
 			ListIterator<Reserva> itr = r.listIterator();
-			{
 				while (itr.hasNext()) {
 					bw.write(itr.next().imprimir());
 					bw.newLine();
 				}
-			}
 			bw.newLine();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();

@@ -6,9 +6,9 @@ import java.io.IOException;
 
 import entidad.Aeropuerto;
 import entidad.Grafo;
-import entidad.Ruta;
 import entidad.Reserva;
-import tpe.Sistema;
+import entidad.Ruta;
+import principal.Sistema;
 
 public class CSVReader {
 
